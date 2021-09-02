@@ -1,0 +1,113 @@
+.animation{
+			position: relative;
+		}
+		.animation .in-animation{
+			display: block;
+			position: absolute;
+			width: 100px;
+			height:100px;
+			background-color: gray;
+			top: 200px;
+			left:200px;
+			border-radius: 50%;
+			animation: animation 2s ease-in-out 1s infinite;
+		}
+
+@keyframes animation{
+	0% {
+    	box-shadow: 0 0 0 0 rgb(66, 64, 66, 0.4);
+  	}
+  70% {
+   		box-shadow: 0 0 0 50px rgba(168, 63, 57, 0);
+  }
+  100% {
+  	  box-shadow: 0 0 0 150px rgba(168, 63, 57, 0);
+  }
+}
+
+/*animation-2*/
+.animation-2{
+	position: relative;
+	background-color: #CFCACF;
+	height: 50px;
+}
+
+.in-animation-2 {
+    position: absolute;
+    top: 50%;
+    color: #8F298F;
+    font-size: 30px;
+    transform: translateY(-50%);
+    animation: animation-2 5s ease-in 1s infinite;
+
+}
+
+@keyframes animation-2{
+	0% {
+    	
+    	left: 0%;
+  	}
+ /* 70% {
+   		left:50%;
+  }*/
+  100% {
+  	  left: 19%;
+  }
+}
+
+.in-phrase{
+	font-style: italic;
+	text-align: center;
+    color: #7A8C8C;
+    position: relative;
+    animation: animation-3 5s ease-in 1s infinite;
+}
+
+@keyframes animation-3{
+	0% {
+    	
+    	opacity: 0.3;
+  	}
+
+  	100% {
+
+  	  opacity: 1;
+
+  }
+}
+
+.animation-3{
+	position: relative;
+}
+/*.animation-3*/ .vic{
+	position: absolute;
+	background: cadetblue;
+    width: 50px;
+    height: 20px;
+    margin-top: 10px;
+    left: 0;
+}
+
+.fab{
+	position:relative;
+}
+.image-animation {
+    margin: 69px 0;
+}
+.animation-4 {
+   position: relative;
+    /* width: 100px; */
+    /* height: 100px; */
+    overflow: hidden;
+    padding: 19% 0;
+    margin-top: 20px;
+}
+
+.animation-4 img {
+    position: absolute;
+    width: 20%;
+    height: 30%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+}

@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GOLDMINE</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js" integrity="sha512-GZ1RIgZaSc8rnco/8CXfRdCpDxRCphenIiZ2ztLy3XQfCbQUSCuk8IudvNHxkRA3oUg6q0qejgN/qqyG1duv5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ext-language_tools.min.js" integrity="sha512-8qx1DL/2Wsrrij2TWX5UzvEaYOFVndR7BogdpOyF4ocMfnfkw28qt8ULkXD9Tef0bLvh3TpnSAljDC7uyniEuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@1,500&family=Fredoka+One&family=Marck+Script&family=Merienda:wght@700&family=Parisienne&family=Source+Code+Pro:wght@600&family=Varela+Round&display=swap" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/highlight.js@11.2.0/styles/monokai.css"
+    />
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300&family=Source+Code+Pro:wght@300&family=Spartan:wght@500&display=swap" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="query.css"> -->
+
+    <style>
+      * {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  /* background-image: url("./images/bk.jpg"); */
+  height: fit-content;
+  width: 100%;
+}
+:root {
+  --eightPx: 0.5rem;
+  --sixteenPx: 1rem;
+  --eightyPx: 5rem;
+  --tenPx: 0.625rem;
+  --sixtyPx: 3.75rem;
+  --fourtyPx: 2.5rem;
+  --twentyPx: 1.25rem;
+  --seventyPx: 4.37rem;
+  --fiftyPx: 3.125rem;
+}
+
+li {
+  margin-bottom: var(--eightPx);
+  font-weight: 600;
+}
+a {
+  text-decoration: none;
+  font-weight: 600;
+  color: black;
+  font-family: "Heebo", sans-serif;
+}
+.comment__body {
+  display: flex;
+  flex-direction: column;
+}
+.textarea {
+  background-color: whitesmoke;
+  border-radius: var(--twentyPx);
+  margin-left: var(--seventyPx);
+  width: 90%;
+  height: var(--eightyPx);
+}
+.comment__button {
+  cursor: pointer;
+  margin-left: 87%;
+  width: fit-content;
+  margin-top: 10px;
+  background-color: red;
+  border: none;
+  padding: var(--eightPx);
+  color: white;
+  border-radius: 4px;
+}
+.prevComment {
+  margin-top: var(--fourtyPx);
+}
+.comment__prev {
+  margin-top: var(--sixteenPx);
+  margin-left: var(--sixtyPx);
+}
+.comment__prev > .author > .authorDetails > .comment__section > img {
+  width: 15px;
+  height: 15px;
+}
+.suggestion {
+  position: fixed;
+  top: 30%;
+  left: 5%;
+  min-height: 70%;
+  max-height: fit-content;
+}
+.suggestion__head {
+  font-family: "Poppins", sans-serif;
+}
+.articlesList {
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper {
+  width: 60vw;
+  margin: auto;
+  padding: var(--fiftyPx) 0;
+  /* overflow: hidden; */
+  background-color: transparent;
+  position: relative;
+}
+
+p {
+  margin: 0;
+}
+
+.lineBreak {
+  height: 1.5px;
+  background-color: gainsboro;
+  margin: 50px 0 20px 0;
+}
+.landingPg {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.qoute {
+  width: 100%;
+  border-radius: var(--tenPx);
+  text-align: right;
+  font-family: "Poppins", sans-serif;
+  font-family: "Parisienne", cursive;
+  /* font-family: 'Merienda', cursive; */
+  /* font-family: 'Marck Script', cursive; */
+  font-size: 40px;
+  position: relative;
+  padding: 40px 170px 40px 0;
+  display: flex;
+  justify-content: flex-end;
+}
+.qoute > p {
+  width: 60%;
+}
+[data-ca3_icon]::before {
+  font-weight: normal;
+  content: attr(data-ca3_icon);
+}
+
+.ca3-scroll-down-arrow {
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.ca3-scroll-down-arrow i {
+  color: rgba(255, 0, 0, 0.517);
+  height: 10px;
+  /* font-weight: 800; */
+}
+.ca3-scroll-down-link {
+  cursor: pointer;
+  height: 30px;
+  width: 60px;
+  margin: 0px 0 0 -40px;
+  line-height: 60px;
+  position: absolute;
+  left: 15%;
+  bottom: 100px;
+  /* color: #fe5d00; */
+  text-align: center;
+  font-size: 70px;
+  text-decoration: none;
+  text-shadow: 0px 0px 3px rgba(228, 15, 15, 0.4);
+
+  -webkit-animation: ca3_fade_move_down 2s ease-in-out infinite;
+  -moz-animation: ca3_fade_move_down 2s ease-in-out infinite;
+  animation: ca3_fade_move_down 2s ease-in-out infinite;
+}
+
+/*animated scroll arrow animation*/
+@-webkit-keyframes ca3_fade_move_down {
+  0% {
+    -webkit-transform: translate(0, -20px);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translate(0, 20px);
+    opacity: 0;
+  }
+}
+@-moz-keyframes ca3_fade_move_down {
+  0% {
+    -moz-transform: translate(0, -20px);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    -moz-transform: translate(0, 20px);
+    opacity: 0;
+  }
+}
+@keyframes ca3_fade_move_down {
+  0% {
+    transform: translate(0, -20px);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, 20px);
+    opacity: 0;
+  }
+}
+
+.c1 {
+  background-color: gainsboro;
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  border-radius: 50%;
+  background-color: #e7e7e7;
+  right: 80px;
+  top: 80px;
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='1' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.c2 {
+  background-color: rgba(255, 0, 0, 0.517);
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  border-radius: 50%;
+  right: 160px;
+  top: 150px;
+}
+.qoute > p::before {
+  content: " ";
+  width: 363px;
+  height: 15px;
+  background-color: rgba(255, 0, 0, 0.517);
+  position: absolute;
+  bottom: 20px;
+  right: 170px;
+  border-radius: 20px;
+}
+.qoute::after {
+  font-family: "Font Awesome 5 Free";
+  content: "\f10e";
+  display: inline-block;
+  padding-right: 3px;
+  vertical-align: middle;
+  font-weight: 900;
+  color: grey;
+  position: absolute;
+  top: 20px;
+  right: 120px;
+}
+
+.heading > p {
+  width: 70%;
+  display: flex;
+  padding-left: 100px;
+  padding-top: 70px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  font-weight: bold;
+  font-size: var(--sixtyPx);
+  text-align: left;
+  margin-bottom: 60px;
+  font-family: "Spartan", sans-serif;
+  font-family: "Asap", sans-serif;
+  /* font-family: "Fredoka One", cursive; */
+  /* font-family: "Source Code Pro", monospace; */
+  font-family: "Varela Round", sans-serif;
+  position: relative;
+  font-weight: bolder;
+}
+.heading > p::after {
+  content: " ";
+  background-color: gainsboro;
+  width: 600px;
+  height: 20px;
+  position: absolute;
+  bottom: -70px;
+  left: 230px;
+  border-radius: 30px;
+}
+.heading > p::before {
+  content: " ";
+  /* border-right: 30px double gainsboro; */
+  background-color: rgba(255, 0, 0, 0.517);
+  width: 100px;
+  height: 20px;
+  position: absolute;
+  bottom: -70px;
+  left: 100px;
+  border-radius: 30px;
+}
+
+.userInteraction > p,
+.content {
+  text-align: justify;
+  margin-bottom: var(--fourtyPx);
+  font-size: 18px;
+  font-family: "Mulish", sans-serif;
+  line-height: 2;
+}
+
+.subHead {
+  font-size: 36px;
+  font-weight: 400;
+  margin-bottom: var(--twentyPx);
+  font-family: "Spartan", sans-serif;
+}
+
+.video,
+.img {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.video > iframe,
+.img > img {
+  border-radius: 15px;
+  width: 65%;
+  margin: var(--sixtyPx) 0;
+  cursor: zoom-in;
+}
+.content > pre {
+  font-size: 15px;
+  text-align: left;
+}
+
+.content > p {
+  margin-bottom: 15px;
+}
+.content > p:last-child {
+  margin-bottom: 0px;
+}
+
+.authorDetails {
+  display: flex;
+  align-items: center;
+}
+.dummy > img {
+  border-radius: 50%;
+  height: var(--eightyPx);
+  width: var(--eightyPx);
+}
+.comment__section > img {
+  border-radius: 50%;
+  height: var(--fourtyPx);
+  width: var(--fourtyPx);
+}
+
+.authorDetails > .details {
+  display: flex;
+  flex-direction: column;
+  margin-left: 30px;
+}
+.authorDetails > .details2 {
+  margin-left: 10px;
+}
+.reply {
+  font-size: 12px;
+}
+.prev {
+  width: fit-content;
+  margin-left: var(--fiftyPx);
+  padding: var(--sixteenPx);
+  height: max-content;
+}
+.comment__props {
+  display: flex;
+  justify-content: flex-start;
+  margin-left: var(--fiftyPx);
+  margin-top: var(--tenPx);
+}
+.props {
+  margin-left: var(--sixteenPx);
+  cursor: pointer;
+}
+
+.tags {
+  display: flex;
+  margin-bottom: var(--sixtyPx);
+}
+
+.tag {
+  width: 90px;
+  height: var(--fourtyPx);
+  border-radius: var(--twentyPx);
+  background-color: rgba(220, 220, 220, 0.639);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 13px;
+}
+.subsubHead {
+  font-family: "Heebo", sans-serif;
+  font-size: var(--twentyPx);
+  margin-bottom: var(--tenPx);
+  font-weight: bold;
+}
+
+.sideBar {
+  background-color: rgba(220, 220, 220, 0.392);
+  margin-left: 15px;
+  position: relative;
+  border-radius: var(--tenPx);
+  padding: 5px;
+}
+.sideBar::before {
+  content: " ";
+  background-color: rgba(0, 0, 0, 0.751);
+  height: 100%;
+  width: var(--tenPx);
+  position: absolute;
+  top: 0px;
+  left: calc(-1 * var(--twentyPx));
+  border-radius: var(--tenPx);
+}
+
+.sideShadow {
+  box-shadow: -5px -5px 10px rgba(211, 208, 208, 0.603);
+  padding: 12px;
+  border-radius: var(--tenPx);
+  margin-bottom: var(--sixtyPx);
+}
+
+.imgZoomDiv {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100vh;
+  display: none;
+  z-index: 10;
+}
+
+.imgZoomDivCloseBtn {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: xxx-large;
+  color: white;
+  cursor: pointer;
+  height: var(--fiftyPx);
+  position: absolute;
+  right: 30px;
+  top: 30px;
+}
+
+.imgZoomDivImg {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.imgZoomDivImg > img {
+  width: 50vw;
+}
+.nextPrevBtns {
+  display: flex;
+  height: var(--sixtyPx);
+  margin-bottom: var(--sixtyPx);
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+}
+
+.nextPrevBtns > div {
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Heebo", sans-serif;
+  border: 2px solid gainsboro;
+  cursor: pointer;
+  border-radius: var(--tenPx);
+  padding: var(--tenPx);
+  width: calc(2 * var(--sixtyPx));
+  color: gray;
+}
+.nextBtn i {
+  margin-left: 15px;
+}
+.prevBtn i {
+  margin-right: 15px;
+}
+
+.constraints {
+  margin-bottom: var(--fourtyPx);
+  padding: 15px;
+  font-style: italic;
+}
+
+.refrence {
+  font-size: var(--sixteenPx);
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: pointer;
+  color: gray;
+  margin-bottom: 5px;
+}
+.easeIn {
+  animation: easeIn;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes easeIn {
+  0% {
+    transform: scale(0.4);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.share {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  flex-direction: column;
+}
+.share div {
+  display: flex;
+  margin: var(--tenPx);
+  margin-top: 0;
+  align-items: center;
+  cursor: pointer;
+}
+.share div i {
+  background-color: black;
+  color: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: var(--tenPx);
+}
+
+.temp1 {
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  font-size: x-large;
+  margin-bottom: var(--twentyPx);
+}
+
+.share {
+  margin-top: var(--sixtyPx);
+}
+.questionLogo{
+  background-color: rgba(255, 0, 0, 0.517);
+    height: var(--eightyPx);
+    width: var(--eightyPx);
+    position: fixed;
+    left: 5vw;
+    top: 80vh;
+    z-index: 5;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 10px  rgba(255, 0, 0, 1);
+    display: none;
+    
+  }
+  
+  .quesInfo{
+  font-weight: bold;
+  background-color: white;
+  width: 250px;
+  font-size: var(--twentyPx);
+  border-radius: var(--tenPx);
+  position: fixed;
+  bottom: calc( 20vh - var(--eightyPx) );
+  left: 12vw;
+  padding: 10px;
+  color: black;
+  z-index: 5;
+  border: 2px solid gainsboro;
+  font-family: "Mulish", sans-serif;
+  display: none;
+}
+
+
+.app_editor {
+  height: 300px;
+  width: 500px;
+}
+
+.app_editor_wrapper {
+  background-color: #cccccc;
+  border-bottom: 1px solid #222222;
+  width: 500px;
+  margin: auto;
+}
+
+
+.run{
+    
+    margin: 10px auto;
+    background-color: rgba(86, 235, 86, 0.432);
+    border-radius: 1px;
+    padding: 10px 15px;
+    width: fit-content;
+    cursor: pointer;
+    border-radius: 10px;
+}
+textarea{
+    display: block;
+    margin: auto;
+    width: 500px;
+    height: 100px;
+    resize: none;
+    outline: none;
+    border-radius: 10px;
+    padding: 8px;
+}
+.code_bg{
+    background-color: whitesmoke;
+    padding: 20px;
+    margin-bottom: 40px;
+}
+.code_tabBar{
+    display: flex;
+    margin: auto;
+    justify-content: space-around;
+    margin-top: -50px;
+    width: 500px;
+    background-color: rgba(82, 82, 82, 0.055);
+    color: rgba(0, 0, 0, 0.479);
+    padding: 5px;
+    border-radius: 4px;
+    margin-bottom: 3px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.tabBar_btn{
+    margin-left: 20px;
+    margin-bottom: 4px;
+    letter-spacing: .3px;
+    cursor: pointer;
+}
+
+
+:root{
+    --eightPx:0.5rem; 
+    --sixteenPx:1rem;
+    --eightyPx:5rem;
+    --tenPx:0.625rem;
+    --sixtyPx:3.75rem;
+    --fourtyPx:2.5rem;
+    --twentyPx:1.25rem;
+    --seventyPx:4.37rem;
+    --fiftyPx:3.125rem;
+    --fourteenPx:0.8rem;
+    --twentyEightPx:1.75rem;
+    --twoFourtyPx:15rem;
+    --twoHundred:12rem;
+    --hundredPx:6.25rem;
+    --twelvePx:0.75rem;
+    --thirtyTwo:2rem;
+    --twentyFour:1.5rem;
+}
+
+
+@media only screen and (max-width: 900px){
+    .wrapper{
+        width: 70vw;
+    }
+    .heading>p{
+        font-size: var(--fourtyPx);
+    }
+    .userInteraction>p, .content,.refrence {
+        font-size:var(--fourteenPx);
+    }
+    .subHead{
+        font-size: var(--twentyEightPx);
+    }
+    .video>iframe, .img>img{
+        height: var(--twoFourtyPx);
+    }
+    .nextPrevBtns>div,.prevBtn{
+        font-size: var(--fourteenPx);
+        height: var(--fourtyPx);
+        width: var(--hundredPx);
+    }
+    .qoute{
+        font-size: var(--twelvePx);
+    }
+
+    .tag{
+        width: var(--eightyPx);
+    }
+    .Circles{
+        display: none;
+    }
+    .qoute>p::before ,.heading > p::before,.heading > p::after{
+        display: none;
+    }
+    .landingPg{
+        justify-content: flex-start;
+        align-items: center;
+        padding-top: 15vh;
+    }
+    .heading > p{
+        text-align: center;
+        padding: 0;
+        margin-bottom: 10vh;
+    }
+    
+    .heading{
+        display: flex;
+        justify-content: center;
+    }
+
+    .qoute {
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        font-size: var(--twentyEightPx);
+
+    }
+
+    .qoute::after{
+        top: 0;
+        right: 10%;
+    }
+    .qoute>p{
+        width: 70%;
+    }
+
+    .ca3-scroll-down-link{
+        left: 50%;
+    }
+
+
+}
+
+@media only screen and (max-width: 780px){
+.app_editor {
+  width: 400px;
+}
+
+.app_editor_wrapper {
+  width: 400px;
+}
+textarea{ 
+    width: 400px;
+}
+.code_tabBar{
+    width: 400px;
+}
+
+}
+
+@media only screen and (max-width: 740px){
+    .share div p {
+        display: none;
+    }
+    .share div i {
+        height: 25px;
+        width: 25px;
+    }
+    
+    .comment{
+        margin-right: 12px;
+    }
+    .ca3-scroll-down-link{
+        bottom: 100px;
+    }
+    .wrapper{
+        padding-top: 0;
+    }
+}
+
+
+/* @media only screen and (max-width: 825px) */
+/* @media only screen and (max-width: 740px) */
+/* @media only screen and (max-width: 680px) */
+/* @media only screen and (max-width: 500px) */
+/* @media only screen and (max-width: 380px) */
+@media only screen and (max-width: 740px){
+    .heading>p{
+        font-size: var(--thirtyTwo);
+    }
+    .subHead{
+        font-size: var(--twentyFour);
+    }
+}
+@media only screen and (max-width: 640px){
+    .heading>p{
+        width: 90%;
+    }
+    .content{
+        margin-bottom: var(--thirtyTwo);
+    }
+    .video>iframe, .img>img{
+        width: 75%;
+        height: 180px;
+    }
+
+    .tag{
+        font-size: var(--fourteenPx);
+        width: var(--eightyPx);
+        height: var(--thirtyTwo);
+    }
+    ol{   
+        padding-left: 20px;
+    }
+    .sideBar::before {
+        width: 7px;
+        left: -14px;
+
+    }
+    .constraints{
+        margin-bottom: var(--thirtyTwo);
+    }
+    .video > iframe, .img > img{
+        margin: var(--fourtyPx) 0;
+    }
+    .video>iframe, .img>img {
+        width: 90%;
+        height: 171px;
+    }
+    .app_editor {
+      width: 300px;
+    }
+
+    .app_editor_wrapper {
+      width: 300px;
+    }
+    textarea{ 
+        width: 300px;
+    }
+    .code_tabBar{
+        width: 300px;
+    }
+}
+@media only screen and (max-width: 500px){
+    .wrapper{
+        width: 80%;
+    }
+    .heading>p{
+        font-size: var(--twentyEightPx);
+    }
+    .qoute>p {
+        padding-bottom: 60px;
+    }
+}
+
+@media only screen and (max-width: 440px){
+  .app_editor {
+    width: 250px;
+  }
+
+  .app_editor_wrapper {
+    width: 250px;
+  }
+  textarea{ 
+      width: 250px;
+  }
+  .code_tabBar{
+      width: 250px;
+  }
+
+}
+
+@media only screen and (max-width: 410px){
+    .heading>p{
+        font-size: var(--twentyFour);
+    }
+    .subHead{
+        font-size: var(--twentyPx);
+    }
+    .userInteraction>p, .content, .refrence{
+        font-size: var(--twelvePx);
+    }
+    .nextPrevBtns>div, .prevBtn{
+        width: var(--eightyPx);
+    }
+    .app_editor {
+      width: 150px;
+    }
+
+    .app_editor_wrapper {
+      width: 150px;
+    }
+    textarea{ 
+        width: 150px;
+    }
+    .code_tabBar{
+        width: 150px;
+    }
+    #language{
+        width: 10px;
+    }
+}
+/* @media only screen and (max-width: 325px) */
+@media only screen and (max-width: 365px){
+    
+}
+    </style>
+
+  </head>
+  <body>
+      <div class="landingPg">
+        <div class="Circles">
+          <div class="c1"></div>
+          <div class="c2"></div>
+        </div>
+      <div class="heading">
+        <p>GOLDMINE</p>
+      </div>
+      <a class="ca3-scroll-down-link ca3-scroll-down-arrow" data-ca3_iconfont="ETmodules" data-ca3_icon="">
+        <i class="fas fa-chevron-down"></i>
+    </a>
+
+      <div class="qoute">
+        <p>
+         It’s never the changes we want that change everything.
+          <br>
+          ~Junot Díaz
+        </p>
+      </div>
+    </div>
+    <div class="questionLogo"><i class="fab fa-quora"></i></div>
+    <div class="quesInfo">GOLDMINE</div>
+    <div class="wrapper">
+      <div class="lineBreak" style="margin-top:0px ;"></div>
+      <div class="userInteraction">
+        <p>Hey there coder. Enjoying DP till now? Well, guess what ? Things are about to get even more interesting.  After all, Gold is involved, you know that one thing we all are running after?
+          <br>
+          Important links:<!--  <a href="https://www.pepcoding.com/resources/online-java-foundation/recursion-backtracking/n-queens-official/ojquestion" target="_blank"> Problem</a>,  --><a href="https://www.youtube.com/watch?v=5KdvH15NJjc" target="_blank"> Question video</a>, <a href="https://www.youtube.com/watch?v=hs0lilfJ7C0&t=469s" target="_blank"> Solution video</a> .
+        </p>
+        <p>This question is quite similar to the previous question <a href="https://www.youtube.com/watch?v=BzTIOsC0xWM&t=61s">“Min Cost in Maze Traversal”</a> so you should watch that video first before attempting this question.</p>
+         <div class="video">
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/BzTIOsC0xWM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        <p>Enough chit chat. Let’s get on with the question.
+        </p>
+        
+        <!-- <p>Do you remember the previous question? Yes, the wave traversal. The way we traversed the 2D array in a wave pattern, here we will be traversing it in a spiral pattern and displaying its element in that order.</p>
+        <p>Also, I have important advice for you that don’t get scared or judge the difficulty level merely with the name of the problem. I know, <b>Wakanda</b> may sound scary; even it did to me, initially. But it’s just a fictional state. Trust me, the problem is way too easy.</p>
+        <p>I would advise you to visit <a href="https://www.pepcoding.com/resources/online-java-foundation/2d-arrays/spiral-display-official/ojquestion" target="_blank">this problem on our website</a> and go through it.</p>
+        <p>Let’s jump to the problem.</p> -->
+      </div>
+
+      <div class="understandingProb">
+        <div class="subHead">
+          <p>UNDERSTANDING THE PROBLEM</p>
+        </div>
+        <div class="content">
+          <p>Have you read the problem statement? It’s fairly simple. Let’s catch you up on that or you can just watch the question video.</p>
+          <div class="video">
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/5KdvH15NJjc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <ul>
+            <li>You are given a grid of size n*m where n and m represent rows and columns respectively and the grid as a whole represents a gold mine.</li>
+            <li>You are standing in front of the left wall and are supposed to dig to the right wall. You can start from any row in the left wall.</li>
+            <li>You are allowed to move 1 cell right-up (d1), 1 cell right (d2) or 1 cell right-down (d3).</li>
+            <li>Each cell has a value that is the amount of gold available in the cell.</li>
+            <li> You are required to identify the maximum amount of gold that can be dug out from the mine.</li>
+          </ul>
+          <div class="img"><img src="./images/image1.png" alt="img" /></div>
+         <p> In Figure 1, you can see that you can start from any row of the start column and have to reach any row in the end column such that the maximum amount of gold can be collected. </p>
+           
+         <p>If we are in cell ‘1’ (as in Figure 1) then we have 3 choices to make 1 step: right-up (‘3’), right (‘2’) or right-down (‘0’).</p>
+
+         <p>Some of the paths that can be taken are depicted with a blue line.</p>
+         
+         <p>Reader, you already know how we start such questions. We break the question in 3 parts: Storage & Meaning, Direction and Travel & Solve.</p>
+             
+        </div>
+      </div>
+
+      <div class="approach" id="approach">
+        <div class="subHead">APPROACH</div>
+        <!-- <div class="subsubHead">Deducing Algorithm</div> -->
+        <div class="content">
+              
+              <div class="subsubHead">STORAGE & MEANING</div>
+              <p>It’s fairly simple. We make an array for DP of the dimensions same as that of the gold mine i.e. n*m.</p>
+              <p>The meaning assigned to a single cell in this grid is that “if we would have started from this cell, what is the maximum amount of gold we could have collected”.</p>
+
+              <div class="subsubHead">DIRECTION</div>
+              
+            <p>We always try to solve the question for a simpler and smaller problem via which we move on to the bigger problem.</p>
+            <p><b>We want you to meditate on the fact that if we had started from any cell of the “end” column ,then the maximum amount of gold we could have collected is the same as the amount of gold corresponding to the cell value in the input array (according to the “Meaning” we assigned to a single cell).</b></p>
+            <p>Why do you think it is so? </p>
+            <p>It’s because we can only take a step in the right direction. In the end column, taking a step anywhere to the right isn’t possible because the grid comes to an end after that.</p>
+            
+            <p>Hence our smaller problem lies at the “end” column. So we move from right to the left direction while calculating the maximum amount.</p>
+            
+            <div class="img"><img src="./images/image2.png" alt="img" /></div>
+
+            <p>Figure 2 is the DP array (drawn in green to differentiate from the input array).</p>
+
+              <div class="subsubHead">TRAVERSE & SOLVE</div>
+
+            <div class="img"><img src="./images/image3.png" alt="img" /></div>
+            <p>Once we have all the maximum amounts for the “end” column, we try to calculate the maximum amount for the column before that. We first calculate it for ‘A’.</p>
+            <p>‘A’ has 2 options whether to go to the right i.e. ‘2’ or right down i.e. ‘4’.Since, 4>2, then for maximum amount of gold, ‘A’ goes to 4. Hence we store the sum of the original value at the cell A i.e. 8 (refer Figure 1) and the value 4. Hence we store 8+4=12 at A.</p>
+            <p>We highly recommend you to watch “Path with Maximum Gold” [2:04 – 5:53] to understand the traversal path better.</p>
+             <div class="video">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/hs0lilfJ7C0?start=124&end=353" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+             </div>
+            <p>Let’s now calculate it for the remaining rows of the column.</p>
+              <div class="img"><img src="./images/image4.png" alt="img" /></div>
+              <div class="img"><img src="./images/image5.png" alt="img" /></div>
+
+            <p>B. This cell has 3 options: 2, 4 and 6. Since 6 is the largest of them, therefore the value of cell B is 0+6=6.</p>
+              <!-- <div class="subsubHead">BASE CASES :</div> -->
+
+            <p>C. This cell has 3 options: 4, 6 and 2. Since 6 is the largest of them, therefore the value of cell C is 4+6=10.</p>
+            <p>D. This cell has 3 options: 6, 2 and 4. Since 6 is the largest of them, therefore the value of cell D is 2+6=8.</p>
+            <p>E. This cell has 3 options: 2, 4 and 1. Since 4 is the largest of them, therefore the value of cell E is 2+4=6.</p>
+            <p>F.  This cell has 2 options: 4 and 1. Since 4 is the largest of them, therefore the value of cell F is 5+4=9.</p>
+            <p>This way you can solve the maximum amount for all the columns.</p>
+            <p>We insist you on trying to find the maximum values at the rest of the cells yourself. The final DP array should look something like this:</p>
+              <div class="img"><img src="./images/image6.png" alt="img" /></div>
+              
+            <p>Now that we have filled the entire grid, we look at the “start” column and think which cell of the “start” column would be wise to start our journey of collecting gold from? We obviously chose the cell with maximum value i.e. 33. Don’t understand why?</p>
+            <p>Go and check the “meaning” of the grid again. “Each cell is assigned with the maximum amount of gold that would be collected if we start from that cell”. Hence, 33 is the maximum value that could be traced out of all the paths if we started from that cell.</p>
+            <p>The required path for amount 33 would like this:</p>
+              <div class="img"><img src="./images/image7.png" alt="img" /></div>
+
+              
+            <!-- <div> -->
+              <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/HGDmj5NrrjM?start=120&end=249" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <p>Let’s write a code for it.</p> -->
+        </div>
+      </div>
+
+       <!--<div class="pseudoCode sideShadow">
+          <div class="subHead">Pseudo code</div>
+            <div class="content">
+              
+              <p>
+                <ol>
+                  <li><b>Choosing one character:</b>We are using our Level and Option method again in this question. We choose a character and keep it in the answer and the rest of the question is the rest of the string without that character.</li>
+                  <li><b>Go to the next level:</b> After we have chosen a character in our answer, the rest of the question is still remaining. We will again choose one character from the remaining part of the string in our next level.</li>
+                  <li><b>Identifying the Base Case:</b>TWe keep on selecting a character from a string and adding it to our answer, so there will be a time when there will be no character remaining in the question as we might have chosen all the characters. This is the base case and this is when we get our permutation because in permutations you have to select all the characters, just their order differs.</li>
+
+                </ol>
+              </p>
+            </div>
+        </div> -->
+
+      <div class="code_bg">
+        <div class="subHead">COMPLETE CODE</div>
+        <div class="content">
+          <p>You must have got a little hang of dynamic programming questions by now , which is why we want you to first give writing the code a try yourself. It’s okay if you fail. DP problems are made just to practice failing so that one day winning feels extra special.</p>
+          
+         
+        </div>
+        <div id="editor1_wrapper" class="app_editor_wrapper">
+            <div id="editor1" class="app_editor">
+                import java.io.*;
+                import java.util.*;
+                 
+                public class Main {
+                 
+                    public static void main(String[] args) throws Exception {
+                  
+                        Scanner scn=new Scanner(System.in);
+                        int n=scn.nextInt();
+                        int m=scn.nextInt();
+                        int[][] arr=new int[n][m];
+                        for(int i=0;i< n;i++){
+                            for(int j=0;j< m;j++){                              //1
+                                arr[i][j]=scn.nextInt();
+                            }                
+                        }
+                        
+                        int[][]dp=new int[n][m];                                   //2
+                        for(int j=m-1;j>=0;j--){                                   //3
+                            for(int i=n-1;i>=0;i--){                               //4
+                 
+                                if(j==m-1){
+                                    dp[i][j]=arr[i][j];                            //5
+                                }
+                                else if(i==0){                                     //6
+                                    dp[i][j]=arr[i][j]+Math.max(dp[i][j+1],dp[i+1][j+1]);
+                                }
+                                else if(i==n-1){                                   //7
+                                    dp[i][j]=arr[i][j]+Math.max(dp[i][j+1],dp[i-1][j+1]);
+                                }
+                                else{                                              //8
+                                  dp[i][j]=arr[i][j]+Math.max(dp[i][j+1],Math.max(dp[i+1][j+1],
+                                  dp [i-1][j+1]));  
+                                }
+                            }
+                            
+                        }
+                        int max=dp[0][0];                                          //9
+                            for(int i=1;i< n;i++){                                  
+                                if(dp[i][0]>max)                                   //10
+                                max=dp[i][0];
+                            }
+                        System.out.println(max);                                   //11
+                    }
+                 
+                }
+
+
+
+            </div>
+          </div>
+          <br><br><br>
+          <div class="code_tabBar">
+            <div style="color: rgba(0, 0, 0, 1);" id="tabBar_0" onclick="tabBar(0)" class="tabBar_btn">input</div>
+            <div id="tabBar_1" onclick="tabBar(1)" class="tabBar_btn">output</div>
+            <div>
+                <form class="language_dropdown">
+                    <select id="language" style="height: 30px;">
+                    <option value = "c_cpp"> C++ 
+                    </option>
+                    <option value = "java"> Java 
+                    </option>
+                    <option value = "python"> Python
+                    </option>
+                    <option value = "javascript"> JavaScript
+                    </option>
+                    </select>
+                </form>
+            </div>
+          </div>
+          <textarea  placeholder="input" name="custom_input" id="custom_input" cols="30" rows="10"></textarea>
+          <textarea  style="display: none;" placeholder="output" name="custom_output" id="custom_output" cols="30" rows="10"></textarea>
+          <div class="run">
+    
+              <i class="fa fa-play" aria-hidden="true"> Run code</i>
+          </div>  
+          </div>
+           <div class="content">
+              <div class="subsubHead">Code Discussion</div>
+             <p>1. Array arr[n][m] is taken as the input for dimensions n and m. 
+              </p>
+              <p>2. We make a new array dp[n][m] with the same dimensions as arr where each cell stores the maximum amount of gold that would be collected if we start from that cell.</p>
+              <p>3. Since we start from the last/ “end” column of the grid, therefore our loop runs from m-1 to  0<sup>th</sup> column.</p>
+              <p>4. For every column, we start traversing from a row at the extremities hence the row iteration runs from n-1 to 0 row (or 0 to n-1). </p>
+              <p>5. As we have already discussed in the “traversal” section, if we are at the “end” column then the maximum value at every cell in the DP array is the value of the input cell itself.</p>
+              <p>6. If one is at the first row of a column then there isn’t an option of going right up available. Hence, the value at the cell is the value of the input array added to the maximum of right and right down.</p>
+              <p>7. If one is at the last row of a column then there isn’t an option of going right down available. Hence, the value at the cell is the value of the input array added to the maximum of right up and right.</p>
+              <p>8.If it is neither of the above 2 cases, then the value at the cell is the sum of the values of the input array and the maximum of right up, right and right down.</p>
+              <p>9. Now that the dp grid is filled , we initialize a variable “max” with dp[0][0].</p>
+              <p>10. For every row of the first column we compare “max” and if we find a value greater than “max”, then it becomes our new max.</p>
+              <p>11. We print the maximum amount of gold stored in this “max”.</p>
+              
+          </div>
+    
+      <div class="analysis">
+        <div class="subHead">Analysis</div>
+        <div class="timeComplex">
+          <div class="content">
+           <!-- <div class="subsubHead">RECURSIVE TREE:</div> -->
+              <!-- 
+            <p>
+              You have already made a recursion tree in the problem “Get Stair Paths”, refer to that tree to build a tree for figure 1 on your own.
+            </p>
+              <div class="video">
+                  <iframe width="560" height="315" src="https://www.youtube.com/embed/hMJAlbJIS7E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <p>After making the tree, check your answer with ours.</p>
+
+              <div class="img"><img src="./images/image4.png" alt="img" /></div>
+
+              <p>Here, the blue highlighted positions are achieved on moving a step in the horizontal direction and the green highlighted positions are achieved on moving a step in the vertical direction.</p>
+              <p>‘h’ and ‘v’ written beside the edges denote the horizontal and vertical directions.</p>
+              <p>Here, we only consider those paths which reach till source=destination.</p>
+              <p>As we have already discussed, the paths which go beyond the destination are considered invalid .</p>
+
+           <div class="subsubHead">EULER PATH:</div>
+            <p>Let’s trace the Euler path for the tree in figure 4 and try to see the paths-so-far at different positions.</p>
+
+              <div class="img"><img src="./images/image5.png" alt="img" /></div>
+              <p>Here, the Euler path is traced by green highlighter and you can see some of the valid paths written besides the vertex positions.</p>
+              <p>In figure 5, you can see that as we move up from source position level and reach the last level where source =destination, the path along the edges of all the levels is printed. The stack is filled at each level according to this Euler path.</p>
+              <p>Now that the path falls back on the previous level, the answer is printed and the last level is popped from the stack.</p>
+              <p>As the Euler path then moves up a level again, the new level gets pushed into the stack once again. This process of popping, pushing and printing keeps going on until all the paths have been printed.</p>
+              <p>When we reach the last answer on the tree, the path keeps moving down all the levels and the stack keeps popping until it is ultimately left empty.</p>
+              <p>You can also refer to the Solution video of “Get Maze Paths” for a better understanding.</p>
+              <div class="video">
+                  <iframe width="560" height="315" src="https://www.youtube.com/embed/7i41gZLXe5k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div> -->
+              <!-- <p>Well, this is going to be fun. Try and understand every step from here as it is going to be a little bit tilted to mathematics.</p> -->
+          </div>
+          <div class="subsubHead">Time Complexity</div>
+          <div class="content">
+            <p><b>O(n<sup>2</sup>)</b></p>
+            <p>This time complexity is quadratic because nested loops are used.</p>
+            
+
+
+          </div>
+        </div>
+        <div class="spaceComplex">
+          <div class="subsubHead">Space Complexity</div>
+          <div class="content">
+            <p><b>O(n<sup>2</sup>)</b></p>
+            <p>
+             Since we use a 2D array for Dynamic Programming, therefore the space used is of complexity n<sup>2</sup>  .
+            </p>
+            
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        <!-- <div class="subsubHead">Extra Gyaan(Knowledge):</div> -->
+       <!--  <p>
+          <ul>
+            <li>Above problem can also be solved by applying the concepts of Recursion & Backtracking. We will encounter this problem again in the Recursion Section.</li>
+            <li>You know how to manipulate your parents to get what you want, right? But since you do not know how to manipulate bits, you are missing out on how to handle the logic inside the inner loop using just one line). </li>
+
+          </ul>
+        </p>
+        <p>But, don’t worry! We will learn these approaches soon.</p>
+        <p><b>Note: </b> If you are answering the space complexity of a solution, then there can be few aspects to the answer: whether we have to consider the space taken by the input or not, whether we have to consider the space taken by the output or not. Hence, you should know how much space your solution is taking with and without considering the space of input and output data also.</p> -->
+        <!-- <p>So reader, we hope you understood the solution of this problem successfully. Don’t worry if you are not able to understand this problem or you were not able to solve this problem by yourself initially.</p> -->
+        <!-- <p>Just spend more time reading and thinking about it. </p> -->
+        <!-- <p>However, if you still face any difficulties in the solution for the problem, you may visit the complete <a href="https://youtu.be/SVFXEqn3Ceo" target="_blank">solution video</a>.</p> -->
+        <!-- <div class="video">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/hMJAlbJIS7E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div> -->
+        <!-- <p>We will see you again in the next problem. Till then, keep solving and learning  more problems.</p> -->
+        <!-- <p>So dear reader, did you get this problem completely? We recommend you again to solve the GET MAZE PATHS WITH JUMPS problem as well. We also recommend you to watch its <a href="https://www.youtube.com/watch?v=VaGBRiSdtFI&list=PL-Jc9J83PIiFxaBahjslhBD1LiJAV7nKs&index=33" target="_blank">complete solution video</a>  and <a href="https://youtu.be/zri_tftYphE?list=PL-Jc9J83PIiFxaBahjslhBD1LiJAV7nKs" target="_blank">the complete solution video</a> of this problem to clear the difference between the “get” and “print” problems in general.</p>
+        <div class="video">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/F6T3tD8Pw20" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="video">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/zri_tftYphE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div> -->
+        <p>We encourage you to watch the video “Goldmine” for a clearer explanation of this problem.</p>
+        <div class="video">
+           <iframe width="560" height="315" src="https://www.youtube.com/embed/hs0lilfJ7C0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <p>With this we conclude our question “Goldmine”. We’ll bring you many such interesting questions as we move further along the lecture. So keep with us on this path of Dynamic Programming! </p>
+        <p>Happy coding!</p>
+      </div>
+     <!--  <div class="content">
+        <div class="subsubHead">Some Suggestions:</div>
+          <div class="content">
+            <p>Here are some suggestions from our side that you don’t want to miss:</p>
+            <ol>
+              <li>This problem was a little different from the other problems where the level and options technique were applied. Here, we didn’t have a choice to choose or not to choose a character, rather we had to choose every character and we had a choice to choose the order in which they appear. (Think and meditate on this point!!!).</li>
+              <li>The mathematical analysis of time complexity is really important. We highly recommend you to take a pen and paper and analyze the Euler tree, Euler path as well as do the mathematical analysis of time complexity yourself to get a perfect grasp of all the concepts.</li>
+            </ol>
+            <p> So, do practice and work hard.</p>
+            <p>Happy Coding!</p>
+          </div>
+      </div>  -->
+      <!-- <div class="refrences">
+        <div class="subHead">References</div>
+        <div class="content">
+          <div class="refrence">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
+            corrupti.
+          </div>
+          <div class="refrence">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
+            corrupti.
+          </div>
+          <div class="refrence">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
+            corrupti.
+          </div>
+          <div class="refrence">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
+            corrupti.
+          </div>
+        </div>
+      </div> -->
+      <div class="nextPrevBtns">
+        <div class="nextBtn">Next <i class="fas fa-greater-than"></i></div>
+        <div class="prevBtn"><i class="fas fa-less-than"></i>Back</div>
+      </div>
+
+      <div class="tags">
+        <div class="tag"> Dynamic</div>
+        <div class="tag">  Programming</div>
+
+       
+       
+        <div class="tag">  2D Arrays </div>
+       
+             
+      </div>      
+      <div class="author">
+        <div class="subHead">AUTHOR</div>
+        <div class="authorDetails">
+          <div class="dummy"><img src="./images/dummy.jpg" alt="" /></div>
+          <div class="details">
+            <span>Shreeya Gupta</span>
+          </div>
+        </div>
+      </div>
+     
+      <div class="share">
+        <p class="temp1" >Share this article</p>
+        <div class="temp2">
+          <div class="span"><i class="fab fa-facebook-f"></i> <p>Facebook</p></div>
+          <div class="span"><i class="fab fa-twitter"></i> <p>Twitter</p></div>
+          <div class="span"><i class="fab fa-instagram"></i> <p>Instagram</p></div>
+          <div class="span"><i class="fab fa-whatsapp"></i><p>Whatsapp</p></div>
+          <div class="span"><i class="fab fa-linkedin-in"></i><p>Linkedin</p></div>
+        </div>
+      </div>
+
+        <div class="lineBreak" style="margin-top: 30px;"></div>
+
+        <div class="imgZoomDiv">
+          <div class="imgZoomDivCloseBtn"><i class="fas fa-times"></i></div>
+          <div class="imgZoomDivImg"><img src="" alt="" /></div>
+        </div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+    <script src="./closeZoomImgDiv.js"></script>
+    <script src="./bookmark.js"></script>
+    <script src="/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+
+
+
+    var aceEditorInstance = ace.edit( "editor1" );
+
+
+aceEditorInstance.setTheme("ace/theme/twilight");
+// inline must be true to syntax highlight
+aceEditorInstance.getSession().setMode( { path: "ace/mode/c_cpp", inline: true } );
+
+// editor 2
+  var aceEditorInstance2 = ace.edit( "editor2" );
+
+
+aceEditorInstance2.setTheme("ace/theme/twilight");
+// inline must be true to syntax highlight
+aceEditorInstance2.getSession().setMode( { path: "ace/mode/c_cpp", inline: true } );
+
+// editor 3
+  var aceEditorInstance3 = ace.edit( "editor3" );
+
+
+aceEditorInstance3.setTheme("ace/theme/twilight");
+// inline must be true to syntax highlight
+aceEditorInstance3.getSession().setMode( { path: "ace/mode/c_cpp", inline: true } );
+/**
+ * Global variable to store the ids of the status of the current dragged ace editor.
+ */
+window.draggingAceEditor = {};
+
+function makeAceEditorResizable(editor){
+    var id_editor = editor.container.id;
+    var id_dragbar = '#' + id_editor + '_dragbar';
+    var id_wrapper = '#' + id_editor + '_wrapper';
+    var wpoffset = 0;
+    window.draggingAceEditor[id_editor] = false;
+
+    $(id_dragbar).mousedown(function(e) {
+        e.preventDefault();
+
+        window.draggingAceEditor[id_editor] = true;
+    
+        var _editor = $('#' + id_editor);
+        var top_offset = _editor.offset().top - wpoffset;
+    
+        // Set editor opacity to 0 to make transparent so our wrapper div shows
+        _editor.css('opacity', 0);
+    
+        // handle mouse movement
+        $(document).mousemove(function(e){
+            var actualY = e.pageY - wpoffset;
+            // editor height
+            var eheight = actualY - top_offset;
+            
+            // Set wrapper height
+            $(id_wrapper).css('height', eheight);
+            
+            // Set dragbar opacity while dragging (set to 0 to not show)
+            $(id_dragbar).css('opacity', 0.15);
+        });
+    });
+    
+    $(document).mouseup(function(e){
+        if (window.draggingAceEditor[id_editor])
+        {
+            var ctx_editor = $('#' + id_editor);
+    
+            var actualY = e.pageY - wpoffset;
+            var top_offset = ctx_editor.offset().top - wpoffset;
+            var eheight = actualY - top_offset;
+    
+            $( document ).unbind('mousemove');
+            
+            // Set dragbar opacity back to 1
+            $(id_dragbar).css('opacity', 1);
+            
+            // Set height on actual editor element, and opacity back to 1
+            ctx_editor.css('height', eheight).css('opacity', 1);
+            
+            // Trigger ace editor resize()
+            editor.resize();
+
+            window.draggingAceEditor[id_editor] = false;
+        }
+    });
+}
+
+
+makeAceEditorResizable(aceEditorInstance);
+
+
+
+</script>
+
+<script>
+    var run = document.getElementsByClassName('run')[0]
+    var input = document.getElementById('custom_input')
+    var language = document.getElementById('language')
+    
+
+    run.addEventListener('click', function(){
+        
+        var unformatted = document.getElementById('editor1').innerText
+        var formatted = unformatted.split("\n")
+        var final = []
+        formatted.forEach(ele=>{
+            if(!parseInt(ele))
+            final.push(ele)
+        
+        })
+        final = final.join(' ')
+        
+        var input_text = input.value
+        var final_input_text = input_text.split('\n').join(' ')
+
+
+         
+        //language
+        const languageValue = language.options[language.selectedIndex].value;
+        //const text = language.options[language.selectedIndex].text;
+        
+        //fetch statement here...
+
+        // fetch('/compileCode',{
+        //     method:'post',
+        //     headers:{
+        //         'Content-Type':'appliation/json'
+        //     },
+        //     body:JSON.stringify({
+        //         input:final_input_text,
+        //         code:final,
+        //         language:languageValue
+        //     })
+        // })
+
+             
+        alert(JSON.stringify({"code":final, "testcase":final_input_text, "language": languageValue}))
+        }
+    )
+</script>
+<script>
+    //tabbar btn control
+    function tabBar(index){
+       
+        if(index===0){ 
+            // show input textarea
+            document.getElementById('custom_output').style.display='none'
+            document.getElementById('custom_input').style.display='block'
+            document.getElementById('tabBar_0').style.color='rgba(0, 0, 0, 1)'
+            document.getElementById('tabBar_1').style.color='rgba(0, 0, 0, 0.479)'
+        }
+        else{
+            // show output textarea
+            document.getElementById('custom_output').style.display='block'
+            document.getElementById('custom_input').style.display='none'
+            document.getElementById('tabBar_1').style.color='rgba(0, 0, 0, 1)'
+            document.getElementById('tabBar_0').style.color='rgba(0, 0, 0, 0.479)'
+        }
+    }
+    
+</script>
+  </body>
+</html>

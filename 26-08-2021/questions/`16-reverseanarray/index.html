@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reverse an Array</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js" integrity="sha512-GZ1RIgZaSc8rnco/8CXfRdCpDxRCphenIiZ2ztLy3XQfCbQUSCuk8IudvNHxkRA3oUg6q0qejgN/qqyG1duv5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ext-language_tools.min.js" integrity="sha512-8qx1DL/2Wsrrij2TWX5UzvEaYOFVndR7BogdpOyF4ocMfnfkw28qt8ULkXD9Tef0bLvh3TpnSAljDC7uyniEuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@1,500&family=Fredoka+One&family=Marck+Script&family=Merienda:wght@700&family=Parisienne&family=Source+Code+Pro:wght@600&family=Varela+Round&display=swap" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/highlight.js@11.2.0/styles/monokai.css"
+    />
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300&family=Source+Code+Pro:wght@300&family=Spartan:wght@500&display=swap" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="query.css"> -->
+
+    <style>
+      * {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  /* background-image: url("./images/bk.jpg"); */
+  height: fit-content;
+  width: 100%;
+}
+:root {
+  --eightPx: 0.5rem;
+  --sixteenPx: 1rem;
+  --eightyPx: 5rem;
+  --tenPx: 0.625rem;
+  --sixtyPx: 3.75rem;
+  --fourtyPx: 2.5rem;
+  --twentyPx: 1.25rem;
+  --seventyPx: 4.37rem;
+  --fiftyPx: 3.125rem;
+}
+
+li {
+  margin-bottom: var(--eightPx);
+  font-weight: 600;
+}
+a {
+  text-decoration: none;
+  font-weight: 600;
+  color: black;
+  font-family: "Heebo", sans-serif;
+}
+.comment__body {
+  display: flex;
+  flex-direction: column;
+}
+.textarea {
+  background-color: whitesmoke;
+  border-radius: var(--twentyPx);
+  margin-left: var(--seventyPx);
+  width: 90%;
+  height: var(--eightyPx);
+}
+.comment__button {
+  cursor: pointer;
+  margin-left: 87%;
+  width: fit-content;
+  margin-top: 10px;
+  background-color: red;
+  border: none;
+  padding: var(--eightPx);
+  color: white;
+  border-radius: 4px;
+}
+.prevComment {
+  margin-top: var(--fourtyPx);
+}
+.comment__prev {
+  margin-top: var(--sixteenPx);
+  margin-left: var(--sixtyPx);
+}
+.comment__prev > .author > .authorDetails > .comment__section > img {
+  width: 15px;
+  height: 15px;
+}
+.suggestion {
+  position: fixed;
+  top: 30%;
+  left: 5%;
+  min-height: 70%;
+  max-height: fit-content;
+}
+.suggestion__head {
+  font-family: "Poppins", sans-serif;
+}
+.articlesList {
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper {
+  width: 60vw;
+  margin: auto;
+  padding: var(--fiftyPx) 0;
+  /* overflow: hidden; */
+  background-color: transparent;
+  position: relative;
+}
+
+p {
+  margin: 0;
+}
+
+.lineBreak {
+  height: 1.5px;
+  background-color: gainsboro;
+  margin: 50px 0 20px 0;
+}
+.landingPg {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.qoute {
+  width: 100%;
+  border-radius: var(--tenPx);
+  text-align: right;
+  font-family: "Poppins", sans-serif;
+  font-family: "Parisienne", cursive;
+  /* font-family: 'Merienda', cursive; */
+  /* font-family: 'Marck Script', cursive; */
+  font-size: 40px;
+  position: relative;
+  padding: 40px 170px 40px 0;
+  display: flex;
+  justify-content: flex-end;
+}
+.qoute > p {
+  width: 60%;
+}
+[data-ca3_icon]::before {
+  font-weight: normal;
+  content: attr(data-ca3_icon);
+}
+
+.ca3-scroll-down-arrow {
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.ca3-scroll-down-arrow i {
+  color: rgba(255, 0, 0, 0.517);
+  height: 10px;
+  /* font-weight: 800; */
+}
+.ca3-scroll-down-link {
+  cursor: pointer;
+  height: 30px;
+  width: 60px;
+  margin: 0px 0 0 -40px;
+  line-height: 60px;
+  position: absolute;
+  left: 15%;
+  bottom: 100px;
+  /* color: #fe5d00; */
+  text-align: center;
+  font-size: 70px;
+  text-decoration: none;
+  text-shadow: 0px 0px 3px rgba(228, 15, 15, 0.4);
+
+  -webkit-animation: ca3_fade_move_down 2s ease-in-out infinite;
+  -moz-animation: ca3_fade_move_down 2s ease-in-out infinite;
+  animation: ca3_fade_move_down 2s ease-in-out infinite;
+}
+
+/*animated scroll arrow animation*/
+@-webkit-keyframes ca3_fade_move_down {
+  0% {
+    -webkit-transform: translate(0, -20px);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translate(0, 20px);
+    opacity: 0;
+  }
+}
+@-moz-keyframes ca3_fade_move_down {
+  0% {
+    -moz-transform: translate(0, -20px);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    -moz-transform: translate(0, 20px);
+    opacity: 0;
+  }
+}
+@keyframes ca3_fade_move_down {
+  0% {
+    transform: translate(0, -20px);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, 20px);
+    opacity: 0;
+  }
+}
+
+.c1 {
+  background-color: gainsboro;
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  border-radius: 50%;
+  background-color: #e7e7e7;
+  right: 80px;
+  top: 80px;
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='1' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.c2 {
+  background-color: rgba(255, 0, 0, 0.517);
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  border-radius: 50%;
+  right: 160px;
+  top: 150px;
+}
+.qoute > p::before {
+  content: " ";
+  width: 363px;
+  height: 15px;
+  background-color: rgba(255, 0, 0, 0.517);
+  position: absolute;
+  bottom: 20px;
+  right: 170px;
+  border-radius: 20px;
+}
+.qoute::after {
+  font-family: "Font Awesome 5 Free";
+  content: "\f10e";
+  display: inline-block;
+  padding-right: 3px;
+  vertical-align: middle;
+  font-weight: 900;
+  color: grey;
+  position: absolute;
+  top: 20px;
+  right: 120px;
+}
+
+.heading > p {
+  width: 70%;
+  display: flex;
+  padding-left: 100px;
+  padding-top: 70px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  font-weight: bold;
+  font-size: var(--sixtyPx);
+  text-align: left;
+  margin-bottom: 60px;
+  font-family: "Spartan", sans-serif;
+  font-family: "Asap", sans-serif;
+  /* font-family: "Fredoka One", cursive; */
+  /* font-family: "Source Code Pro", monospace; */
+  font-family: "Varela Round", sans-serif;
+  position: relative;
+  font-weight: bolder;
+}
+.heading > p::after {
+  content: " ";
+  background-color: gainsboro;
+  width: 600px;
+  height: 20px;
+  position: absolute;
+  bottom: -70px;
+  left: 230px;
+  border-radius: 30px;
+}
+.heading > p::before {
+  content: " ";
+  /* border-right: 30px double gainsboro; */
+  background-color: rgba(255, 0, 0, 0.517);
+  width: 100px;
+  height: 20px;
+  position: absolute;
+  bottom: -70px;
+  left: 100px;
+  border-radius: 30px;
+}
+
+.userInteraction > p,
+.content {
+  text-align: justify;
+  margin-bottom: var(--fourtyPx);
+  font-size: 18px;
+  font-family: "Mulish", sans-serif;
+  line-height: 2;
+}
+
+.subHead {
+  font-size: 36px;
+  font-weight: 400;
+  margin-bottom: var(--twentyPx);
+  font-family: "Spartan", sans-serif;
+}
+
+.video,
+.img {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.video > iframe,
+.img > img {
+  border-radius: 15px;
+  width: 65%;
+  margin: var(--sixtyPx) 0;
+  cursor: zoom-in;
+}
+.content > pre {
+  font-size: 15px;
+  text-align: left;
+}
+
+.content > p {
+  margin-bottom: 15px;
+}
+.content > p:last-child {
+  margin-bottom: 0px;
+}
+
+.authorDetails {
+  display: flex;
+  align-items: center;
+}
+.dummy > img {
+  border-radius: 50%;
+  height: var(--eightyPx);
+  width: var(--eightyPx);
+}
+.comment__section > img {
+  border-radius: 50%;
+  height: var(--fourtyPx);
+  width: var(--fourtyPx);
+}
+
+.authorDetails > .details {
+  display: flex;
+  flex-direction: column;
+  margin-left: 30px;
+}
+.authorDetails > .details2 {
+  margin-left: 10px;
+}
+.reply {
+  font-size: 12px;
+}
+.prev {
+  width: fit-content;
+  margin-left: var(--fiftyPx);
+  padding: var(--sixteenPx);
+  height: max-content;
+}
+.comment__props {
+  display: flex;
+  justify-content: flex-start;
+  margin-left: var(--fiftyPx);
+  margin-top: var(--tenPx);
+}
+.props {
+  margin-left: var(--sixteenPx);
+  cursor: pointer;
+}
+
+.tags {
+  display: flex;
+  margin-bottom: var(--sixtyPx);
+}
+
+.tag {
+  width: 90px;
+  height: var(--fourtyPx);
+  border-radius: var(--twentyPx);
+  background-color: rgba(220, 220, 220, 0.639);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 13px;
+}
+.subsubHead {
+  font-family: "Heebo", sans-serif;
+  font-size: var(--twentyPx);
+  margin-bottom: var(--tenPx);
+  font-weight: bold;
+}
+
+.sideBar {
+  background-color: rgba(220, 220, 220, 0.392);
+  margin-left: 15px;
+  position: relative;
+  border-radius: var(--tenPx);
+  padding: 5px;
+}
+.sideBar::before {
+  content: " ";
+  background-color: rgba(0, 0, 0, 0.751);
+  height: 100%;
+  width: var(--tenPx);
+  position: absolute;
+  top: 0px;
+  left: calc(-1 * var(--twentyPx));
+  border-radius: var(--tenPx);
+}
+
+.sideShadow {
+  box-shadow: -5px -5px 10px rgba(211, 208, 208, 0.603);
+  padding: 12px;
+  border-radius: var(--tenPx);
+  margin-bottom: var(--sixtyPx);
+}
+
+.imgZoomDiv {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100vh;
+  display: none;
+  z-index: 10;
+}
+
+.imgZoomDivCloseBtn {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: xxx-large;
+  color: white;
+  cursor: pointer;
+  height: var(--fiftyPx);
+  position: absolute;
+  right: 30px;
+  top: 30px;
+}
+
+.imgZoomDivImg {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.imgZoomDivImg > img {
+  width: 50vw;
+}
+.nextPrevBtns {
+  display: flex;
+  height: var(--sixtyPx);
+  margin-bottom: var(--sixtyPx);
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+}
+
+.nextPrevBtns > div {
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Heebo", sans-serif;
+  border: 2px solid gainsboro;
+  cursor: pointer;
+  border-radius: var(--tenPx);
+  padding: var(--tenPx);
+  width: calc(2 * var(--sixtyPx));
+  color: gray;
+}
+.nextBtn i {
+  margin-left: 15px;
+}
+.prevBtn i {
+  margin-right: 15px;
+}
+
+.constraints {
+  margin-bottom: var(--fourtyPx);
+  padding: 15px;
+  font-style: italic;
+}
+
+.refrence {
+  font-size: var(--sixteenPx);
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: pointer;
+  color: gray;
+  margin-bottom: 5px;
+}
+.easeIn {
+  animation: easeIn;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes easeIn {
+  0% {
+    transform: scale(0.4);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.share {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  flex-direction: column;
+}
+.share div {
+  display: flex;
+  margin: var(--tenPx);
+  margin-top: 0;
+  align-items: center;
+  cursor: pointer;
+}
+.share div i {
+  background-color: black;
+  color: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: var(--tenPx);
+}
+
+.temp1 {
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  font-size: x-large;
+  margin-bottom: var(--twentyPx);
+}
+
+.share {
+  margin-top: var(--sixtyPx);
+}
+.questionLogo{
+  background-color: rgba(255, 0, 0, 0.517);
+    height: var(--eightyPx);
+    width: var(--eightyPx);
+    position: fixed;
+    left: 5vw;
+    top: 80vh;
+    z-index: 5;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 10px  rgba(255, 0, 0, 1);
+    display: none;
+    
+  }
+  
+  .quesInfo{
+  font-weight: bold;
+  background-color: white;
+  width: 250px;
+  font-size: var(--twentyPx);
+  border-radius: var(--tenPx);
+  position: fixed;
+  bottom: calc( 20vh - var(--eightyPx) );
+  left: 12vw;
+  padding: 10px;
+  color: black;
+  z-index: 5;
+  border: 2px solid gainsboro;
+  font-family: "Mulish", sans-serif;
+  display: none;
+}
+
+
+.app_editor {
+  height: 300px;
+  width: 500px;
+}
+
+.app_editor_wrapper {
+  background-color: #cccccc;
+  border-bottom: 1px solid #222222;
+  width: 500px;
+  margin: auto;
+}
+
+
+.run{
+    
+    margin: 10px auto;
+    background-color: rgba(86, 235, 86, 0.432);
+    border-radius: 1px;
+    padding: 10px 15px;
+    width: fit-content;
+    cursor: pointer;
+    border-radius: 10px;
+}
+textarea{
+    display: block;
+    margin: auto;
+    width: 500px;
+    height: 100px;
+    resize: none;
+    outline: none;
+    border-radius: 10px;
+    padding: 8px;
+}
+.code_bg{
+    background-color: whitesmoke;
+    padding: 20px;
+    margin-bottom: 40px;
+}
+.code_tabBar{
+    display: flex;
+    margin: auto;
+    justify-content: space-around;
+    margin-top: -50px;
+    width: 500px;
+    background-color: rgba(82, 82, 82, 0.055);
+    color: rgba(0, 0, 0, 0.479);
+    padding: 5px;
+    border-radius: 4px;
+    margin-bottom: 3px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.tabBar_btn{
+    margin-left: 20px;
+    margin-bottom: 4px;
+    letter-spacing: .3px;
+    cursor: pointer;
+}
+
+
+:root{
+    --eightPx:0.5rem; 
+    --sixteenPx:1rem;
+    --eightyPx:5rem;
+    --tenPx:0.625rem;
+    --sixtyPx:3.75rem;
+    --fourtyPx:2.5rem;
+    --twentyPx:1.25rem;
+    --seventyPx:4.37rem;
+    --fiftyPx:3.125rem;
+    --fourteenPx:0.8rem;
+    --twentyEightPx:1.75rem;
+    --twoFourtyPx:15rem;
+    --twoHundred:12rem;
+    --hundredPx:6.25rem;
+    --twelvePx:0.75rem;
+    --thirtyTwo:2rem;
+    --twentyFour:1.5rem;
+}
+
+
+@media only screen and (max-width: 900px){
+    .wrapper{
+        width: 70vw;
+    }
+    .heading>p{
+        font-size: var(--fourtyPx);
+    }
+    .userInteraction>p, .content,.refrence {
+        font-size:var(--fourteenPx);
+    }
+    .subHead{
+        font-size: var(--twentyEightPx);
+    }
+    .video>iframe, .img>img{
+        height: var(--twoFourtyPx);
+    }
+    .nextPrevBtns>div,.prevBtn{
+        font-size: var(--fourteenPx);
+        height: var(--fourtyPx);
+        width: var(--hundredPx);
+    }
+    .qoute{
+        font-size: var(--twelvePx);
+    }
+
+    .tag{
+        width: var(--eightyPx);
+    }
+    .Circles{
+        display: none;
+    }
+    .qoute>p::before ,.heading > p::before,.heading > p::after{
+        display: none;
+    }
+    .landingPg{
+        justify-content: flex-start;
+        align-items: center;
+        padding-top: 15vh;
+    }
+    .heading > p{
+        text-align: center;
+        padding: 0;
+        margin-bottom: 10vh;
+    }
+    
+    .heading{
+        display: flex;
+        justify-content: center;
+    }
+
+    .qoute {
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        font-size: var(--twentyEightPx);
+
+    }
+
+    .qoute::after{
+        top: 0;
+        right: 10%;
+    }
+    .qoute>p{
+        width: 70%;
+    }
+
+    .ca3-scroll-down-link{
+        left: 50%;
+    }
+
+
+}
+
+@media only screen and (max-width: 780px){
+.app_editor {
+  width: 400px;
+}
+
+.app_editor_wrapper {
+  width: 400px;
+}
+textarea{ 
+    width: 400px;
+}
+.code_tabBar{
+    width: 400px;
+}
+
+}
+
+@media only screen and (max-width: 740px){
+    .share div p {
+        display: none;
+    }
+    .share div i {
+        height: 25px;
+        width: 25px;
+    }
+    
+    .comment{
+        margin-right: 12px;
+    }
+    .ca3-scroll-down-link{
+        bottom: 100px;
+    }
+    .wrapper{
+        padding-top: 0;
+    }
+}
+
+
+/* @media only screen and (max-width: 825px) */
+/* @media only screen and (max-width: 740px) */
+/* @media only screen and (max-width: 680px) */
+/* @media only screen and (max-width: 500px) */
+/* @media only screen and (max-width: 380px) */
+@media only screen and (max-width: 740px){
+    .heading>p{
+        font-size: var(--thirtyTwo);
+    }
+    .subHead{
+        font-size: var(--twentyFour);
+    }
+}
+@media only screen and (max-width: 640px){
+    .heading>p{
+        width: 90%;
+    }
+    .content{
+        margin-bottom: var(--thirtyTwo);
+    }
+    .video>iframe, .img>img{
+        width: 75%;
+        height: 180px;
+    }
+
+    .tag{
+        font-size: var(--fourteenPx);
+        width: var(--eightyPx);
+        height: var(--thirtyTwo);
+    }
+    ol{   
+        padding-left: 20px;
+    }
+    .sideBar::before {
+        width: 7px;
+        left: -14px;
+
+    }
+    .constraints{
+        margin-bottom: var(--thirtyTwo);
+    }
+    .video > iframe, .img > img{
+        margin: var(--fourtyPx) 0;
+    }
+    .video>iframe, .img>img {
+        width: 90%;
+        height: 171px;
+    }
+    .app_editor {
+      width: 300px;
+    }
+
+    .app_editor_wrapper {
+      width: 300px;
+    }
+    textarea{ 
+        width: 300px;
+    }
+    .code_tabBar{
+        width: 300px;
+    }
+}
+@media only screen and (max-width: 500px){
+    .wrapper{
+        width: 80%;
+    }
+    .heading>p{
+        font-size: var(--twentyEightPx);
+    }
+    .qoute>p {
+        padding-bottom: 60px;
+    }
+}
+
+@media only screen and (max-width: 440px){
+  .app_editor {
+    width: 250px;
+  }
+
+  .app_editor_wrapper {
+    width: 250px;
+  }
+  textarea{ 
+      width: 250px;
+  }
+  .code_tabBar{
+      width: 250px;
+  }
+
+}
+
+@media only screen and (max-width: 410px){
+    .heading>p{
+        font-size: var(--twentyFour);
+    }
+    .subHead{
+        font-size: var(--twentyPx);
+    }
+    .userInteraction>p, .content, .refrence{
+        font-size: var(--twelvePx);
+    }
+    .nextPrevBtns>div, .prevBtn{
+        width: var(--eightyPx);
+    }
+    .app_editor {
+      width: 150px;
+    }
+
+    .app_editor_wrapper {
+      width: 150px;
+    }
+    textarea{ 
+        width: 150px;
+    }
+    .code_tabBar{
+        width: 150px;
+    }
+    #language{
+        width: 10px;
+    }
+}
+/* @media only screen and (max-width: 325px) */
+@media only screen and (max-width: 365px){
+    
+}
+    </style>
+
+  </head>
+  <body>
+      <div class="landingPg">
+        <div class="Circles">
+          <div class="c1"></div>
+          <div class="c2"></div>
+        </div>
+      <div class="heading">
+        <p>Reverse an Array:</p>
+      </div>
+      <a class="ca3-scroll-down-link ca3-scroll-down-arrow" data-ca3_iconfont="ETmodules" data-ca3_icon="">
+        <i class="fas fa-chevron-down"></i>
+    </a>
+
+      <div class="qoute">
+        <p>
+          Do not forget that the reverse also has a reverse.
+        </p>
+      </div>
+    </div>
+    <div class="questionLogo"><i class="fab fa-quora"></i></div>
+    <div class="quesInfo">Reverse an Array:</div>
+    <div class="wrapper">
+      <div class="lineBreak" style="margin-top:0px ;"></div>
+      <div class="userInteraction">
+        <p>
+          Dear reader, welcome back. So, how is it going with the arrays? Don’t
+          worry if you face any issues as you are studying a data structure for the first time. The
+          only way to solve a problem or understand a concept is to give it a lot of time and hard
+          work. So, keep practicing and moving forward.
+          <br>
+          Important link: <a href="https://www.pepcoding.com/resources/online-java-foundation/function-and-arrays/inverse-of-an-array-official/ojquestion" target="_blank"> Problem</a>, <a href="https://www.youtube.com/watch?v=RJITdlWR1-g&ab_channel=Pepcoding" target="_blank"> Question</a>, <a href="https://youtu.be/CuvSfyO5iRUO" target="_blank"> Solution</a> .
+        </p>
+      </div>
+      <div class="understandingProb">
+        <div class="subHead">
+          <p>UNDERSTANDING THE PROBLEM</p>
+        </div>
+        <div class="content">
+          <p>
+            Well, this problem states that we have to reverse an array. You
+            may refer to the image below for understanding the problem.
+          </p>
+        </div>
+        <div class="img"><img src="./images/Capture.PNG" alt="img" /></div>
+          <p>
+            Please note that we are not just printing the array in reverse, rather we are reversing it in
+            the memory (as shown in the fig-1) so that the contents of the array are reversed inside
+            it. You may refer to the <a href="https://www.youtube.com/watch?v=RJITdlWR1-g&ab_channel=Pepcoding" target="_blank">question video</a> to understand the problem if you face any
+            difficulties.
+          </p>
+          <div class="video">
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/RJITdlWR1-g"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+      </div>
+
+      <div class="approach" id="approach">
+        <div class="subHead">PSEUDO CODE/APPROACH-1</div>
+        <div class="content">
+          <p>
+              <b>Create an Auxiliary Array:</b> Create an array of the same size as that of the input array.
+          </p>
+          <p>
+            <b>Fill the Auxiliary Array:</b> Fill this array by taking the variable at the end of the input
+            array and traversing in reverse direction.
+          </p>
+          <p>
+            <b>Fill back the original Array:</b> Now copy all the elements back to the original array
+              as it is from the Auxiliary array and the input array has been reversed.
+          </p>
+
+          <p class="sideBar">
+                <b>APPROACH-1:</b> Before going through the solution, we recommend you solve the problem
+                by yourself. Relax and take your time to think about the solution. As we know that there
+                can be multiple ways of solving a particular problem, but as programmers, our job is to
+               choose the best one. But, friend, we are in the learning phase and it is always better to
+               learn more, right? So, let’s discuss the very basic approach for this problem first. Have a
+               look at the image given below:
+          </p>
+          <div class="img"><img src="./images/Capture.PNG" alt="img" /></div>
+          <p>
+            So, does this image give you any ideas? Let’s see what we are doing here. We took an
+            array b[ ] which was the same size as that of array a[ ]. Now, we are copying the values
+            of a[ ] into b[ ] in reverse order.
+          </p>
+          <p>
+            We can do this simply, by taking a variable ‘i’ on the last index of a[ ] and a variable ‘j’ on
+            the index 0 of array b[ ]. We do b [ j ]= a[ i ] and the value of a[ i ] gets copied to b[ j ] .
+          </p>
+           <p>
+              Then we increment the value of ‘j’ and decrement the value of ‘i’ and repeat the same
+              procedure till ‘j’ completes the array in the forward direction and ‘i&#39; completes the array
+              in the backward direction.
+            </p>
+            <p>
+              As a result, we will get the reverse of a[ ] in b[ ] . But the problem states that we have to
+              reverse the array a[ ]. This means that we can’t have the reverse of a[ ] just kept stored
+              in b[ ]. Rather we have to reverse a[ ]. So we will copy back the values of b[ ] to a[ ] as
+              shown in the figure. (fig-3).
+            </p>
+            <div class="img"><img src="./images/capture2.PNG" alt="img" /></div>
+            <p>
+              So, as you can see from the figure, we have reversed the array a[ ] by copying back the
+              elements from b[ ] to a[ ]. Dear reader, Please think that:
+            </p>
+        </div>
+      </div>
+      <!-- <div class="pseudoCode sideShadow">
+        <div class="subHead">Pseudo code</div>
+        <div class="content">
+          <ol>
+            <li>
+              Set counter = 0
+
+            </li>
+            <li>
+              Extract Digits of number n until n becomes 0. If the current digit extracted is the same as the digit d, update counter by 1.
+
+            </li>
+           
+            <li>
+              Return counter variable 
+
+            </li>
+            
+          </ol>
+          <div class="content">
+            <p>Seems simple, right? Do give it a try before reading the code.
+            </p>
+          </div>
+        </div>
+      </div> -->
+
+      <div class="code_bg">
+        <div class="subHead">COMPLETE CODE</div>
+        <div id="editor1_wrapper" class="app_editor_wrapper">
+            <div id="editor1" class="app_editor">
+
+             import java.io.*;
+                  import java.util.*;
+                   
+                  public class Main {
+                   
+                      public static boolean IsKnightSafe(boolean[][] chess, int i, int j) {
+                          if(i - 1 >= 0 && j - 2 >= 0 && chess[i - 1][j - 2]){
+                              return false;
+                          }
+                   
+                          if(i - 2 >= 0 && j - 1 >= 0 && chess[i - 2][j - 1]){
+                              return false;
+                          }
+                   
+                          if(i - 2 >= 0 && j + 1 < chess.length && chess[i - 2][j + 1]){
+                              return false;
+                          }
+                   
+                          if(i - 1 >= 0 && j + 2 < chess.length && chess[i - 1][j + 2]){
+                              return false;
+                          }
+                   
+                          return true;
+                      }
+                   
+                      public static void nknights(int kpsf, int tk, 
+                                            boolean[][] chess, int lcno) {
+                          if (kpsf == tk) {
+                              for (int row = 0; row < chess.length; row++) {
+                                  for (int col = 0; col < chess.length; col++) {
+                                      System.out.print(chess[row][col] ? "k\t" : "-\t");
+                                  }
+                                  System.out.println();
+                              }
+                              System.out.println();
+                              return;
+                          }
+                   
+                          for (int i = lcno + 1; i < chess.length * chess.length; i++) {
+                              int row = i / chess.length;
+                              int col = i % chess.length;
+                   
+                              if (chess[row][col] == false 
+                                        && IsKnightSafe(chess, row, col)) {
+                                  chess[row][col] = true;
+                                  nknights(kpsf + 1, tk, chess, row * chess.length + col);
+                                  chess[row][col] = false;
+                              }       
+                          }
+                      }
+                   
+                      public static void main(String[] args) throws Exception {
+                          BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+                          int n = Integer.parseInt(br.readLine());
+                          boolean[][] chess = new boolean[n][n];
+                   
+                          nknights(0, n, chess, -1);
+                      }
+                  }                
+            </div>
+    
+          </div>
+          <br><br><br>
+          <div class="code_tabBar">
+            <div style="color: rgba(0, 0, 0, 1);" id="tabBar_0" onclick="tabBar(0)" class="tabBar_btn">input</div>
+            <div id="tabBar_1" onclick="tabBar(1)" class="tabBar_btn">output</div>
+            <div>
+                <form class="language_dropdown">
+                    <select id="language" style="height: 30px;">
+                    <option value = "c_cpp"> C++ 
+                    </option>
+                    <option value = "java"> Java 
+                    </option>
+                    <option value = "python"> Python
+                    </option>
+                    <option value = "javascript"> JavaScript
+                    </option>
+                    </select>
+                </form>
+            </div>
+          </div>
+          <textarea  placeholder="input" name="custom_input" id="custom_input" cols="30" rows="10"></textarea>
+          <textarea  style="display: none;" placeholder="output" name="custom_output" id="custom_output" cols="30" rows="10"></textarea>
+          <div class="run">
+    
+              <i class="fa fa-play" aria-hidden="true"> Run code</i>
+          </div>  
+      </div>
+
+      <div class="analysis">
+        <div class="subHead">Analysis</div>
+        <div class="timeComplex">
+          <div class="content">
+            <p>
+              So, we have traversed the array twice. Once while copying the values from a[ ] to b[ ] and
+              other times while copying back the values from b[ ] to a[ ].
+            </p>
+          </div>
+
+          <div class="subsubHead">Time Complexity</div>
+          <div class="content">
+            <p>
+              O(n) as we have traversed the array twice. Once while copying the
+              values from a[ ] to b[ ] and other times while copying back the values from b[ ] to a[ ].
+            </p>
+          </div>
+        </div>
+        <div class="spaceComplex">
+          <div class="subsubHead">Space Complexity</div>
+          <div class="content">
+            <p>
+              O(n) as we have used an extra array which is also known as an
+              <b>auxiliary array</b> in the programmer’s language. The size of the array was the same as
+              that of the given array.
+
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="approach" id="approach">
+        <div class="subHead">PSEUDO CODE/APPROACH-2</div>
+        <div class="content">
+          <p>
+            <ol>
+              <li><b>Take two variables:</b> Take a variable ‘i’ at the 0th index and j at the end of the
+                  array.
+              </li>
+              <li><b>Swap:</b>Swap the values arr[i] and arr[j] and increment i and decrement j. Keep up
+                  this procedure till i&lt;j and the array will be reversed.
+              </li>
+            </ol>
+          </p>
+          <p>Now that we have seen a basic method to solve the problem, we have also encountered
+              that the space complexity was O(n) due to using the auxiliary array. So, we will avoid
+              using that array. Dear reader, try and think how we can avoid using an extra array and
+              save the memory. Let’s discuss this method now. Have a look at the figure given below:
+          </p>
+          <div class="img"><img src="./images/approach-op-.png" alt="img"></div>
+
+          <p>So, did you understand what we are doing here? Don’t worry if you didn’t. Let’s
+              understand this together. We have kept a variable ‘i&#39; at index 0 of the array and a
+              variable ‘j’ at the last index of the array. Now we are swapping the values a[ i ] and a[ j ]
+              i.e. we are swapping the first and the last value. Then we move our ‘i’ variable one place
+              ahead and bring our ‘j’ variable one place back and swap the values a[ i ] and a[ j ]] again
+              i.e. we are now swapping the second and the second last values. We will continue this
+              process till (i&lt;j) as when ‘i’ becomes greater than or equal to ‘j’ we would have scanned
+              the entire array and reversed it. This is also called <b>reversing in-place</b>. If you have any
+              problem in reversing the array using this method you may refer to the solution video
+              (0:16-0:43). Now let’s have a look at the code for this method.
+          </p>
+
+          <div class="video">
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/CuvSfyO5iRU"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+
+       </div> 
+        <div class="code_bg">
+          <div class="subHead">COMPLETE CODE</div>
+          <div id="editor1_wrapper" class="app_editor_wrapper">
+            <div id="editor2" class="app_editor">
+              import java.io.*;
+              import java.util.*;
+              public class Main{
+                public static void display(int[] a){
+                  StringBuilder sb = new StringBuilder();
+                  for(int val: a){
+                    sb.append(val + &quot; &quot;);
+                  }
+                  System.out.println(sb);
+                }
+                public static void reverse(int[] a){
+                 
+                    for(int i=0,j=a.length-1,i&lt;j;i++,j--)
+                    {
+                        int temp=a[i];
+                        a[i]=a[j];
+                        a[j]=temp;
+                    }
+                }
+              public static void main(String[] args) throws Exception {
+                  BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+                  int n = Integer.parseInt(br.readLine());
+                  int[] a = new int[n];
+                  for(int i = 0; i &lt; n; i++){
+                     a[i] = Integer.parseInt(br.readLine());
+                  }
+                  reverse(a);
+                  display(a);
+               }
+              }
+            </div>
+          </div>
+          <br><br><br>
+          <div class="code_tabBar">
+            <div style="color: rgba(0, 0, 0, 1);" id="tabBar_0" onclick="tabBar(0)" class="tabBar_btn">input</div>
+            <div id="tabBar_1" onclick="tabBar(1)" class="tabBar_btn">output</div>
+            <div>
+                <form class="language_dropdown">
+                    <select id="language" style="height: 30px;">
+                    <option value = "c_cpp"> C++ 
+                    </option>
+                    <option value = "java"> Java 
+                    </option>
+                    <option value = "python"> Python
+                    </option>
+                    <option value = "javascript"> JavaScript
+                    </option>
+                    </select>
+                </form>
+            </div>
+          </div>
+          <textarea  placeholder="input" name="custom_input" id="custom_input" cols="30" rows="10"></textarea>
+          <textarea  style="display: none;" placeholder="output" name="custom_output" id="custom_output" cols="30" rows="10"></textarea>
+          <div class="run">
+    
+              <i class="fa fa-play" aria-hidden="true"> Run code</i>
+          </div>  
+      </div>
+
+       <div class="analysis">
+              <div class="subHead">Analysis</div>
+              <div class="timeComplex">
+                <!-- <div class="content">
+                  <p>
+                    So, we have traversed the array twice. Once while copying the values from a[ ] to b[ ] and
+                    other times while copying back the values from b[ ] to a[ ].
+                  </p>
+                </div> -->
+
+                <div class="subsubHead">Time Complexity</div>
+                <div class="content">
+                  <p>
+                    O(n) since we have traversed the entire array once.
+                  </p>
+                </div>
+              </div>
+              <div class="spaceComplex">
+                <div class="subsubHead">Space Complexity</div>
+                <div class="content">
+                  <p>
+                    O(1) since we have not used any extra language.
+                  </p>
+                </div>
+              </div>
+              <div class="content">
+                  <p>
+                    <b>Note that the number of passes was 2 in the previous method while they are
+                    now 1. (think about it!!)</b>
+                  </p>
+              </div>
+              <div class="content">
+                <p>Now, we have talked about every aspect of this problem. Dear reader, if you face
+                    any issues you can watch the <a href="https://youtu.be/CuvSfyO5iRU" target="_blank"></a>complete solution video. We hope that you have
+                    now got the solution completely and have understood both the approaches from
+                    above.</p>
+              </div>
+       </div>
+      <div class="content">
+        <p>
+          I hope you enjoyed solving the problem with me. Let’s meet now to deep dive into how the number system works from the next article. 
+
+        </p>
+      </div>
+      <!-- <div class="refrences">
+        <div class="subHead">References</div>
+        <div class="content">
+          <div class="refrence">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
+            corrupti.
+          </div>
+          <div class="refrence">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
+            corrupti.
+          </div>
+          <div class="refrence">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
+            corrupti.
+          </div>
+          <div class="refrence">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
+            corrupti.
+          </div>
+        </div>
+      </div> -->
+      <div class="nextPrevBtns">
+        <div class="nextBtn">Next <i class="fas fa-greater-than"></i></div>
+        <div class="prevBtn"><i class="fas fa-less-than"></i>Back</div>
+      </div>
+
+      <div class="tags">
+        <div class="tag">Functions</div>
+        <div class="tag">Arrays</div>
+      </div>      
+      <div class="author">
+        <div class="subHead">AUTHOR</div>
+        <div class="authorDetails">
+          <div class="dummy"><img src="./images/dummy.jpg" alt="" /></div>
+          <div class="details">
+            <span>Guneet Malhotra</span>
+          </div>
+        </div>
+      </div>
+     
+      <div class="share">
+        <p class="temp1" >Share this article</p>
+        <div class="temp2">
+          <div class="span"><i class="fab fa-facebook-f"></i> <p>Facebook</p></div>
+          <div class="span"><i class="fab fa-twitter"></i> <p>Twitter</p></div>
+          <div class="span"><i class="fab fa-instagram"></i> <p>Instagram</p></div>
+          <div class="span"><i class="fab fa-whatsapp"></i><p>Whatsapp</p></div>
+          <div class="span"><i class="fab fa-linkedin-in"></i><p>Linkedin</p></div>
+        </div>
+      </div>
+
+        <div class="lineBreak" style="margin-top: 30px;"></div>
+          <div class="imgZoomDiv">
+            <div class="imgZoomDivCloseBtn"><i class="fas fa-times"></i></div>
+            <div class="imgZoomDivImg"><img src="" alt="" /></div>
+          </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+    <script src="./closeZoomImgDiv.js"></script>
+    <script src="./bookmark.js"></script>
+    <script src="/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+
+
+
+    var aceEditorInstance = ace.edit( "editor1" );
+
+
+aceEditorInstance.setTheme("ace/theme/twilight");
+// inline must be true to syntax highlight
+aceEditorInstance.getSession().setMode( { path: "ace/mode/c_cpp", inline: true } );
+
+ var aceEditorInstance2 = ace.edit( "editor2" );
+
+
+aceEditorInstance2.setTheme("ace/theme/twilight");
+// inline must be true to syntax highlight
+aceEditorInstance2.getSession().setMode( { path: "ace/mode/c_cpp", inline: true } );
+
+/**
+ * Global variable to store the ids of the status of the current dragged ace editor.
+ */
+window.draggingAceEditor = {};
+
+function makeAceEditorResizable(editor){
+    var id_editor = editor.container.id;
+    var id_dragbar = '#' + id_editor + '_dragbar';
+    var id_wrapper = '#' + id_editor + '_wrapper';
+    var wpoffset = 0;
+    window.draggingAceEditor[id_editor] = false;
+
+    $(id_dragbar).mousedown(function(e) {
+        e.preventDefault();
+
+        window.draggingAceEditor[id_editor] = true;
+    
+        var _editor = $('#' + id_editor);
+        var top_offset = _editor.offset().top - wpoffset;
+    
+        // Set editor opacity to 0 to make transparent so our wrapper div shows
+        _editor.css('opacity', 0);
+    
+        // handle mouse movement
+        $(document).mousemove(function(e){
+            var actualY = e.pageY - wpoffset;
+            // editor height
+            var eheight = actualY - top_offset;
+            
+            // Set wrapper height
+            $(id_wrapper).css('height', eheight);
+            
+            // Set dragbar opacity while dragging (set to 0 to not show)
+            $(id_dragbar).css('opacity', 0.15);
+        });
+    });
+    
+    $(document).mouseup(function(e){
+        if (window.draggingAceEditor[id_editor])
+        {
+            var ctx_editor = $('#' + id_editor);
+    
+            var actualY = e.pageY - wpoffset;
+            var top_offset = ctx_editor.offset().top - wpoffset;
+            var eheight = actualY - top_offset;
+    
+            $( document ).unbind('mousemove');
+            
+            // Set dragbar opacity back to 1
+            $(id_dragbar).css('opacity', 1);
+            
+            // Set height on actual editor element, and opacity back to 1
+            ctx_editor.css('height', eheight).css('opacity', 1);
+            
+            // Trigger ace editor resize()
+            editor.resize();
+
+            window.draggingAceEditor[id_editor] = false;
+        }
+    });
+}
+
+
+makeAceEditorResizable(aceEditorInstance);
+
+
+
+</script>
+
+<script>
+    var run = document.getElementsByClassName('run')[0]
+    var input = document.getElementById('custom_input')
+    var language = document.getElementById('language')
+    
+
+    run.addEventListener('click', function(){
+        
+        var unformatted = document.getElementById('editor1').innerText
+        var formatted = unformatted.split("\n")
+        var final = []
+        formatted.forEach(ele=>{
+            if(!parseInt(ele))
+            final.push(ele)
+        
+        })
+        final = final.join(' ')
+        
+        var input_text = input.value
+        var final_input_text = input_text.split('\n').join(' ')
+
+
+         
+        //language
+        const languageValue = language.options[language.selectedIndex].value;
+        //const text = language.options[language.selectedIndex].text;
+        
+        //fetch statement here...
+
+        // fetch('/compileCode',{
+        //     method:'post',
+        //     headers:{
+        //         'Content-Type':'appliation/json'
+        //     },
+        //     body:JSON.stringify({
+        //         input:final_input_text,
+        //         code:final,
+        //         language:languageValue
+        //     })
+        // })
+
+             
+        alert(JSON.stringify({"code":final, "testcase":final_input_text, "language": languageValue}))
+        }
+    )
+</script>
+<script>
+    //tabbar btn control
+    function tabBar(index){
+       
+        if(index===0){ 
+            // show input textarea
+            document.getElementById('custom_output').style.display='none'
+            document.getElementById('custom_input').style.display='block'
+            document.getElementById('tabBar_0').style.color='rgba(0, 0, 0, 1)'
+            document.getElementById('tabBar_1').style.color='rgba(0, 0, 0, 0.479)'
+        }
+        else{
+            // show output textarea
+            document.getElementById('custom_output').style.display='block'
+            document.getElementById('custom_input').style.display='none'
+            document.getElementById('tabBar_1').style.color='rgba(0, 0, 0, 1)'
+            document.getElementById('tabBar_0').style.color='rgba(0, 0, 0, 0.479)'
+        }
+    }
+    
+</script>
+  </body>
+</html>
