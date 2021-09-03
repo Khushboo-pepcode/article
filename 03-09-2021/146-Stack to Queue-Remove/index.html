@@ -971,6 +971,9 @@ textarea{
           <p> We are given two stacks, one is the main stack and the other is the helper stack. We have to adapt them and make them behave like a queue. Also, we have to take care that the <b>remove</b>method of the queue is efficient i.e. it should be achieved in O(1) time complexity whereas the <b>add</b> method can take O(n) time. If you have solved the previous problem then this is just a piece of cake for you.</p>
           
           <p>You may refer to the <a href="https://www.youtube.com/watch?v=tL1G0YX0ZZM" target="_blank">question video</a> to understand the problem completely. The main challenge of this question is to convert the LIFO nature of the stack to the FIFO nature of the queue.</p>
+          <div class="youtube-video">
+              <iframe width="640" height="360" src="https://www.youtube.com/embed/tL1G0YX0ZZM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div> 
         </div>
       </div>
 
@@ -983,42 +986,41 @@ textarea{
             <li><b>Add: </b>Let us consider the following example.
                 <div class="img"><img src="./images/image1.png" alt="img" /></div>
              
-           Let us say, we want to insert these values into the queue. So, we know that each value will be inserted at the end of the queue. How are we going to insert them? Have a look at fig-2 shown below:
-                <div class="img"><img src="./images/image2.png" alt="img" /></div>
-           The above diagram shows the analogy of inserting the value in a stack and a queue. The values inserted in a queue would always be inserted at the end of the queue. Similarly, the values inserted in a stack are always at the top of the stack. So, the add function is pretty simple.
-           <br>
-           <b>All we have to do to add a value to a queue is to push the value into the main stack.</b> 
+          We have to add these elements to the queue. If we simply add these elements to the main stack then it will be analogous to add them in a queue as adding the elements to the end of the queue is analogous to adding the elements at the top of the stack (see fig-2).
 
+              <div class="img"><img src="./images/image2.png" alt="img" /></div>
+           This is what we did in the previous question when we had to make the add method efficient without taking care of the remove method. Here, the situation is exactly the opposite. If you notice, when we try to remove an element from the queue, we will not be able to remove the element in O(1) time (You know this from the previous question). So, it is clear that we will not insert the elements in this way. So, the question is, how are we going to insert the elements?
+
+             <div class="img"><img src="./images/image3.png" alt="img" /></div>
+
+           We are trying to insert the same elements as shown above step by step. So, we have inserted the first element 10 into the main stack. Our aim is that when we pop from the main stack, we should get the element at the front of the queue. Why? Well obviously, to make the remove function efficient. If we see in this case the front of the queue is at the top of the main stack. So, there is no problem.
+             <div class="img"><img src="./images/image4.png" alt="img" /></div>
+            Now we try to add 20 into the queue. So, if we push 20 into the main stack, then the top of the main stack will contain the rear element of the queue rather than the front. So, we pop out all the contents of the main stack and push it into the helper stack. Then, we push the value i.e. 20 into the main stack and pop all the values from the helper stack, and push them into the main stack. We find that the main stack now has the front element of the queue at its top and whenever we try to remove it from the queue, we will be able to remove the front element easily by popping the value from the main stack.  We will keep on doing this and after all the elements are   added, our stacks will look like this: 
+             <div class="img"><img src="./images/image5.png" alt="img" /></div>
+            <b>So, finally, we conclude that to add an element to the queue we will pop out all the elements present in the main stack and push them into the helper stack and then push the given element into the main stack and again pop out all the values from the helper stack and push them into the main stack.</b>
+            <br>
+            You may refer to the solution video (0:29-2:16) if you have any doubts regarding the add method.
+            <div class="youtube-video">
+              <iframe width="640" height="360" src="https://www.youtube.com/embed/J8EejK8zvw8?start=29&end=136" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
             </li>
-            <li><b>Size: </b> TThe size function returns the size of the queue at a given time. Since the values inserted in a queue are in reality, being inserted in the main stack given to us, so the size of the queue at any time will be equal to the size of the main stack at that time. <b>So, we just have to return the size of the main stack.</b>
+            <li><b>Size: </b> The size of the queue will be equal to the size of the main stack at any particular time. So, it is going to be very easy. We just have to return the size of the main stack.
                
             </li>
-            <li><b>Peek: </b>So, dear reader, did you get the above two methods? If you have any doubts about the above methods, you may refer to the solution video (0:25-1:21) to clear all your doubts regarding the <b>add</b> and <b>size</b> methods. <b>The making of add method efficient will lead to an increase in the time of the peek and remove methods.</b>  Why? Think about it yourself!!!
-              <br>
-             Have a look at the diagram shown below:
-              <div class="img"><img src="./images/image3.png" alt="img" /></div>
-             The problem is pretty obvious. If we peek into the queue, we should get the element at the front of the queue i.e. we should get 10. But, if we apply the peek method directly to the main stack, we will get the value 50 as the peek method of the stack will return the element at the top of the stack. So, what should we do?
-            <br>
-            Let us bring the other stack (helper stack) into the picture now. Let’s pop all the elements one by one from the main stack and push them into the helper stack. 
-            <br>
-             So, first of all, 50 will be popped out from the main stack and will be inserted into the helper stack. So, the element which was at the top of the main stack is now at the bottom of the helper stack and the element which was at the bottom, now is at the top of the helper stack. Have a look at the diagram shown below (fig-4):
-            <div class="img"><img src="./images/image4.png" alt="img" /></div>
-            So, if we peek into the helper stack, the element at the top is actually the element at the front of the queue. So, we will now <b>peek from the helper stack and it will be analogous to the peek method of the queue. After this, we will copy back the elements from the helper stack to the main stack</b> and the situation will again be like fig-3. So, the peek method is also complete. Now, let us move to the last method i.e. remove.
+            <li><b>Peek: </b>As we have already discussed, we have added the elements in such a way that the element at the front of the queue will be at the top of the stack. So, we just have to apply the peek method to the main stack which will return the topmost element of the stack i.e. q[front] (see fig-6).
+
+             
+             <div class="img"><img src="./images/image6.png" alt="img" /></div>
+            
             </li>
 
-          <li><b>Remove:</b> The queue always removes the value from its front. But we know that the top of the main stack    gives us the rear and not the front. So, how will we remove the front element? We will apply the same procedure as we did for the peek method. Let us copy all the elements from the main stack to the helper stack (see fig-5)
-            <div class="img"><img src="./images/image5.png" alt="img" /></div>
-
-            Now, if we pop the element from the helper stack then 10 will be removed and this is what we wanted. So, we will pop from the helper stack and copy the values back to the main stack. The corresponding queue and situation of the main stack after popping is shown below:
-             <div class="img"><img src="./images/image6.png" alt="img" /></div>
-            So, this is how we will remove the element from the queue adapted from two stacks.
+          <li><b>Remove:</b> Again, we did all the hard work in the add function to make the remove method efficient. So, we know that we just have to pop the element from the main stack to remove an element from the queue (removing the element at the front in the queue). 
+            <div class="img"><img src="./images/image7.png" alt="img" /></div>
           </li>
 
           </ol>
-          <p>You may refer to the solution video (1:25-5:00) to clear all your doubts about the peek and the remove methods. Now that we have studied all the methods, let us code them.</p>
-           <div class="youtube-video">
-            <iframe width="640" height="360" src="https://www.youtube.com/embed/EbMCOZzpRpw?start=85&end=300" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
+          <p>Now that we have understood every method in-depth, let us move to code the solution.</p>
+           
 
          <!--  <p class="sub-heading-2">Building a Normal Queue:</p> -->
         
@@ -1039,12 +1041,12 @@ textarea{
               <p>
                 <ol>
                   <li><b>Add:</b>
-                    The add method is very easy to implement. To add the values in the queue we will push the values into the main stack.
+                    We will not implement the add method directly. Rather, we will first pop all the elements from the main stack and push them into the helper stack. Then, we will add the new element to the main stack and pop all the elements from the helper stack, and push them to the main stack.
                   </li>
-                  <li><b>Peek:</b> Keep on popping out the values from the main stack and inserting them into the helper stack. When the main stack is empty, return the value at the top of the helper stack and copy the values back to the main stack.</li>
-                  <li><b>Size:</b>  It is also very simple. Just return the size of the main stack. 
+                  <li><b>Peek:</b>  We will use the peek method of the stack and it will give us the top value of the main stack. This will be the same as the front value of the queue.</li>
+                  <li><b>Size:</b>   It is also very simple. Just return the size of the main stack. 
                   </li>
-                  <li><b>Remove:</b>Do the same as we did for the peek method except, before copying the values back to the main stack, pop once from the helper stack and then copy.
+                  <li><b>Remove:</b> Simply pop a value from the main stack. This will remove the value from the front of the queue.
                   </li>
                 </ol>
               </p>
@@ -1079,7 +1081,15 @@ textarea{
                       }
                    
                       void add(int val) {
+                        while(mainS.size() > 0){
+                          helperS.push(mainS.pop());
+                        }
+                   
                         mainS.push(val);
+                   
+                        while(helperS.size() > 0){
+                          mainS.push(helperS.pop());
+                        }
                       }
                    
                       int remove() {
@@ -1087,17 +1097,7 @@ textarea{
                           System.out.println("Queue underflow");
                           return -1;
                         } else {
-                          while (mainS.size() > 1) {
-                            helperS.push(mainS.pop());
-                          }
-                   
-                          int val = mainS.pop();
-                   
-                          while (helperS.size() > 0) {
-                            mainS.push(helperS.pop());
-                          }
-                   
-                          return val;
+                          return mainS.pop();
                         }
                       }
                    
@@ -1106,18 +1106,7 @@ textarea{
                           System.out.println("Queue underflow");
                           return -1;
                         } else {
-                          while (mainS.size() > 1) {
-                            helperS.push(mainS.pop());
-                          }
-                   
-                          int val = mainS.pop();
-                          helperS.push(val);
-                   
-                          while (helperS.size() > 0) {
-                            mainS.push(helperS.pop());
-                          }
-                   
-                          return val;
+                          return mainS.peek();
                         }
                       }
                     }
@@ -1148,7 +1137,6 @@ textarea{
                       }
                     }
                   }
-
 
 
 
@@ -1195,9 +1183,9 @@ textarea{
                   </div>
                 <li>Now that we have this merged sorted array with us we return it as the answer.</li>
               </ol> -->
-              <p>Dear reader, if you have any doubts regarding the code shown above, you may refer to the complete solution video to clear all your doubts. Now, let us discuss the time and space complexities of all of the above methods.</p>
+              <p>Dear reader, we hope that you got the solution and the code. Still, if you have any doubts regarding the solution or the code you may watch the complete solution video to understand the concept properly.</p>
                 <div class="youtube-video">
-                    <iframe width="640" height="360" src="https://www.youtube.com/embed/EbMCOZzpRpw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe width="640" height="360" src="https://www.youtube.com/embed/J8EejK8zvw8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
 
           </div> 
@@ -1228,27 +1216,30 @@ textarea{
           <div class="sub-heading-2">Time Complexity</div>
           <div class="content">
             
-            <p><b>Add: </b>The time complexity is O(1) because we have used the stack push method.</p>
+            <p><b>Add: </b> The time complexity is O(n) as we are popping all the values from the main stack and pushing them into the helper stack and doing vice-versa. So, the time complexity becomes n+n=2n=O(n).</p>
             
-            <p><b>Size:</b> The time complexity is O(1) as we have just returned the size of the stack.</p>
+            <p><b>Remove: </b> The time complexity for this method is O(1) as we just popped a value from the main stack.</p>
+
+            <p><b>Size:</b> The time complexity is O(1) as we just return the size of the main stack.</p>
             
-            <p><b>Peek:</b>The time complexity of the peek method is O(n) as we pooped the entire stack of n elements and then pushed them back again. So, there are two traversals. So, the time complexity will be n+n=2n i.e. O(n).</p> 
+            <p><b>Peek:</b> The time complexity is O(1) as we just use the peek method of the main stack.</p> 
             
-            <p><b>Remove: </b>The time complexity of this method is O(n) as we pooped the entire stack of n elements and then pushed them back again. So, there are two traversals. So, the time complexity will be n+n=2n i.e. O(n).</p>
-            
+           
+            <p></p>
           </div>
         </div>
-       <!--  <div class="spaceComplex">
+        <div class="spaceComplex">
           <div class="sub-heading-2">Space Complexity</div>
           <div class="content">
             
             <p>
-             The space complexity is also <b>O(n)</b> as we make an array of size=2n where n is the current size of the queue.
+            Well the space complexity can be considered as O(n) as we are using two stacks for implementing the queue. But, these two stacks are given to us in our question, and apart from these stacks, we have not used any extra data structure or memory to implement the queue. Since the data structure that is given in the question (2 stacks in this case) is not considered in the space complexity, the space complexity will be O(1).
+
             </p>
             
             
           </div>
-        </div> -->
+        </div>
       </div>
 
       <div class="content">
@@ -1286,9 +1277,9 @@ textarea{
         </div>
         <p>Suggestions and feedback are always welcomed. You can contact us via <a href="https://www.pepcoding.com/" target="_blank">our website</a>.</p>
         <p>Just don’t burden yourself; there is a lot to come. This is merely the beginning. Keep trying more and more problems.</p> -->
-        <p> We hope that you got the solution completely and also understood that making add efficient will increase the time for peek and remove methods. If you still have any doubts, you may refer to the complete solution video to clear all of them.</p>
+        <p> So, dear reader, we hope that you have understood the entire solution and the code as well as the time and space complexity analysis. If you still have any doubts you may refer to the complete solution video to clear all your doubts.</p>
         <div class="youtube-video">
-            <iframe width="640" height="360" src="https://www.youtube.com/embed/EbMCOZzpRpw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+           <iframe width="640" height="360" src="https://www.youtube.com/embed/J8EejK8zvw8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <!-- <p>Till then, Goodbye !</p> -->
         <!-- <p>Happy coding!</p> -->
@@ -1298,8 +1289,8 @@ textarea{
           <div class="content">
             <p>Here are some suggestions from our side that you do not want to miss:</p>
             <ol>
-              <li>The next question is about doing the same thing but making the remove method efficient. We recommend you try to solve it on your own first. Take hints from this question and you will very easily solve the next one. </li>
-              <li>The stacks and queues are simple yet tricky data structures because of their LIFO and FIFO properties respectively. Later in this course and in LEVEL 2 when you will solve problems, it will be very crucial to understand what to use. So, these questions are clearing your basics to get you ready for such problems. We suggest you revise the entire section in one go after the completion of the next two questions which will conclude the section. Until then, Happy Coding!!!</li>
+              <li>This was also a very basic and easy problem, right? But you have to understand the real-world concepts behind it. What would you prefer in a real-world scenario? A queue that is push efficient or pop efficient, if the condition is to make it using two stacks? Depends on the need, right? But if you forget about the need right now, what would you use? Think and answer with a reason!!! </li>
+              <li>We suggest you search and spend some time thinking about where these kinds of situations may arise where you can either implement a push or a pop efficient queue. Until then, Happy Coding!!!</li>
             </ol>
             
             <!-- <p> Till then, Happy Coding!</p>  -->
