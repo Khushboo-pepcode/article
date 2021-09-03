@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stack to Queue Adapter- Add Efficient</title>
+    <title>Stack to Queue Adapter- Remove Efficient</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js" integrity="sha512-GZ1RIgZaSc8rnco/8CXfRdCpDxRCphenIiZ2ztLy3XQfCbQUSCuk8IudvNHxkRA3oUg6q0qejgN/qqyG1duv5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ext-language_tools.min.js" integrity="sha512-8qx1DL/2Wsrrij2TWX5UzvEaYOFVndR7BogdpOyF4ocMfnfkw28qt8ULkXD9Tef0bLvh3TpnSAljDC7uyniEuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -120,7 +120,7 @@ p {
   margin: 0;
 }
 
-.lineBreak {
+.article-divider {
   height: 1.5px;
   background-color: gainsboro;
   margin: 50px 0 20px 0;
@@ -268,7 +268,7 @@ p {
   right: 120px;
 }
 
-.heading > p {
+.topic-name > p {
   width: 70%;
   display: flex;
   padding-left: 100px;
@@ -288,7 +288,7 @@ p {
   position: relative;
   font-weight: bolder;
 }
-.heading > p::after {
+.topic-name > p::after {
   content: " ";
   background-color: gainsboro;
   width: 600px;
@@ -298,7 +298,7 @@ p {
   left: 230px;
   border-radius: 30px;
 }
-.heading > p::before {
+.topic-name > p::before {
   content: " ";
   /* border-right: 30px double gainsboro; */
   background-color: rgba(255, 0, 0, 0.517);
@@ -310,7 +310,7 @@ p {
   border-radius: 30px;
 }
 
-.userInteraction > p,
+.article-content > p,
 .content {
   text-align: justify;
   margin-bottom: var(--fourtyPx);
@@ -319,20 +319,20 @@ p {
   line-height: 2;
 }
 
-.subHead {
+.sub-heading-1 {
   font-size: 36px;
   font-weight: 400;
   margin-bottom: var(--twentyPx);
   font-family: "Spartan", sans-serif;
 }
 
-.video,
+.youtube-video,
 .img {
   width: 100%;
   display: flex;
   justify-content: center;
 }
-.video > iframe,
+.youtube-video > iframe,
 .img > img {
   border-radius: 15px;
   width: 65%;
@@ -394,7 +394,7 @@ p {
   cursor: pointer;
 }
 
-.tags {
+.article-tags {
   display: flex;
   margin-bottom: var(--sixtyPx);
 }
@@ -409,7 +409,7 @@ p {
   align-items: center;
   margin-right: 13px;
 }
-.subsubHead {
+.sub-heading-2 {
   font-family: "Heebo", sans-serif;
   font-size: var(--twentyPx);
   margin-bottom: var(--tenPx);
@@ -591,7 +591,7 @@ p {
     
   }
   
-  .quesInfo{
+  .ques-info{
   font-weight: bold;
   background-color: white;
   width: 250px;
@@ -693,16 +693,16 @@ textarea{
     .wrapper{
         width: 70vw;
     }
-    .heading>p{
+    .topic-name>p{
         font-size: var(--fourtyPx);
     }
-    .userInteraction>p, .content,.refrence {
+    .article-content>p, .content,.refrence {
         font-size:var(--fourteenPx);
     }
-    .subHead{
+    .sub-heading-1{
         font-size: var(--twentyEightPx);
     }
-    .video>iframe, .img>img{
+    .youtube-video>iframe, .img>img{
         height: var(--twoFourtyPx);
     }
     .nextPrevBtns>div,.prevBtn{
@@ -720,7 +720,7 @@ textarea{
     .Circles{
         display: none;
     }
-    .qoute>p::before ,.heading > p::before,.heading > p::after{
+    .qoute>p::before ,.topic-name > p::before,.topic-name > p::after{
         display: none;
     }
     .landingPg{
@@ -728,13 +728,13 @@ textarea{
         align-items: center;
         padding-top: 15vh;
     }
-    .heading > p{
+    .topic-name > p{
         text-align: center;
         padding: 0;
         margin-bottom: 10vh;
     }
     
-    .heading{
+    .topic-name{
         display: flex;
         justify-content: center;
     }
@@ -807,21 +807,21 @@ textarea{
 /* @media only screen and (max-width: 500px) */
 /* @media only screen and (max-width: 380px) */
 @media only screen and (max-width: 740px){
-    .heading>p{
+    .topic-name>p{
         font-size: var(--thirtyTwo);
     }
-    .subHead{
+    .sub-heading-1{
         font-size: var(--twentyFour);
     }
 }
 @media only screen and (max-width: 640px){
-    .heading>p{
+    .topic-name>p{
         width: 90%;
     }
     .content{
         margin-bottom: var(--thirtyTwo);
     }
-    .video>iframe, .img>img{
+    .youtube-video>iframe, .img>img{
         width: 75%;
         height: 180px;
     }
@@ -842,10 +842,10 @@ textarea{
     .constraints{
         margin-bottom: var(--thirtyTwo);
     }
-    .video > iframe, .img > img{
+    .youtube-video > iframe, .img > img{
         margin: var(--fourtyPx) 0;
     }
-    .video>iframe, .img>img {
+    .youtube-video>iframe, .img>img {
         width: 90%;
         height: 171px;
     }
@@ -867,7 +867,7 @@ textarea{
     .wrapper{
         width: 80%;
     }
-    .heading>p{
+    .topic-name>p{
         font-size: var(--twentyEightPx);
     }
     .qoute>p {
@@ -893,13 +893,13 @@ textarea{
 }
 
 @media only screen and (max-width: 410px){
-    .heading>p{
+    .topic-name>p{
         font-size: var(--twentyFour);
     }
-    .subHead{
+    .sub-heading-1{
         font-size: var(--twentyPx);
     }
-    .userInteraction>p, .content, .refrence{
+    .article-content>p, .content, .refrence{
         font-size: var(--twelvePx);
     }
     .nextPrevBtns>div, .prevBtn{
@@ -935,8 +935,8 @@ textarea{
           <div class="c1"></div>
           <div class="c2"></div>
         </div>
-      <div class="heading">
-        <p>Stack to Queue Adapter- Add Efficient</p>
+      <div class="topic-name">
+        <p>Stack to Queue Adapter- Remove Efficient</p>
       </div>
       <a class="ca3-scroll-down-link ca3-scroll-down-arrow" data-ca3_iconfont="ETmodules" data-ca3_icon="">
         <i class="fas fa-chevron-down"></i>
@@ -944,44 +944,43 @@ textarea{
 
       <div class="qoute">
         <p>
-         One “not so good” programmer can create 2 jobs a year. Hardwork is the only key to not being that.
+         Programs must be written for the people to be read and only incidentally for machines to execute
           <!-- <br>
           ~Steve McConnell -->
         </p>
       </div>
     </div>
     <div class="questionLogo"><i class="fab fa-quora"></i></div>
-    <div class="quesInfo">Stack to Queue Adapter- Add Efficient</div>
+    <div class="ques-info">Stack to Queue Adapter- Remove Efficient</div>
     <div class="wrapper">
-      <div class="lineBreak" style="margin-top:0px ;"></div>
-      <div class="userInteraction">
-        <p>Welcome back, dear reader. So, how is it going? We hope you have understood both stacks and queues well by now and have practiced both of them well . So, let’s discuss this problem.
-
+      <div class="article-divider" style="margin-top:0px ;"></div>
+      <div class="article-content">
+        <p>Welcome back, dear reader. So, how is it going? We hope that you have solved the previous question: <a href="https://www.pepcoding.com/resources/online-java-foundation/stacks-and-queues/stack-to-queue-adapter-add-efficient-official/ojquestion" target="_blank">STACK TO QUEUE ADAPTER: ADD-EFFICIENT</a> . We recommend you solve this problem first as this problem is very similar to the previous one. So, let’s discuss this problem. 
            
           <br>
-          Important links:<!--  <a href="https://www.pepcoding.com/resources/online-java-foundation/time-and-space-complexity/pivot-sorted-rotated-array-official/ojquestion" target="_blank"> Problem</a>,   --><a href="https://youtu.be/YKjh6ggBy-Q" target="_blank"> Question video</a>,  <a href="https://youtu.be/EbMCOZzpRpw" target="_blank"> Solution video</a>.
+          Important links:<!--  <a href="https://www.pepcoding.com/resources/online-java-foundation/time-and-space-complexity/pivot-sorted-rotated-array-official/ojquestion" target="_blank"> Problem</a>,   --><a href="https://www.youtube.com/watch?v=tL1G0YX0ZZM" target="_blank"> Question video</a>,  <a href="https://youtu.be/J8EejK8zvw8" target="_blank"> Solution video</a>.
         </p>
           
       </div>
 
       <div class="understandingProb">
-        <div class="subHead">
+        <div class="sub-heading-1">
           <p>UNDERSTANDING THE PROBLEM</p>
         </div>
         <div class="content">
-          <p> We are given two stacks, one is the main stack and the other is the helper stack. We have to adapt them and make them behave like a queue. Also, we have to take care that the <b>add</b> method of the queue is efficient i.e. it should be achieved in O(1) time complexity whereas the <b>peek</b> and <b>remove</b> methods can take O(n) time.</p>
+          <p> We are given two stacks, one is the main stack and the other is the helper stack. We have to adapt them and make them behave like a queue. Also, we have to take care that the <b>remove</b>method of the queue is efficient i.e. it should be achieved in O(1) time complexity whereas the <b>add</b> method can take O(n) time. If you have solved the previous problem then this is just a piece of cake for you.</p>
           
-          <p>You may refer to the <a href="https://youtu.be/YKjh6ggBy-Q" target="_blank">question video</a> to understand the problem completely. The main challenge of this question is to convert the LIFO nature of the stack to the FIFO nature of the queue.</p>
+          <p>You may refer to the <a href="https://www.youtube.com/watch?v=tL1G0YX0ZZM" target="_blank">question video</a> to understand the problem completely. The main challenge of this question is to convert the LIFO nature of the stack to the FIFO nature of the queue.</p>
         </div>
       </div>
 
       <div class="approach" id="approach">
-        <div class="subHead">APPROACH</div>
-        <!-- <div class="subsubHead">Deducing Algorithm</div> -->
+        <div class="sub-heading-1">APPROACH</div>
+        <!-- <div class="sub-heading-2">Deducing Algorithm</div> -->
         <div class="content">
           
           <ol>
-            <li><b>Add: </b>Let us discuss the add function first. Dear reader, you have already studied that the add method in a queue inserts the value at the end of the queue. Now, let us consider this example given below:
+            <li><b>Add: </b>Let us consider the following example.
                 <div class="img"><img src="./images/image1.png" alt="img" /></div>
              
            Let us say, we want to insert these values into the queue. So, we know that each value will be inserted at the end of the queue. How are we going to insert them? Have a look at fig-2 shown below:
@@ -1017,13 +1016,13 @@ textarea{
 
           </ol>
           <p>You may refer to the solution video (1:25-5:00) to clear all your doubts about the peek and the remove methods. Now that we have studied all the methods, let us code them.</p>
-           <div class="video">
+           <div class="youtube-video">
             <iframe width="640" height="360" src="https://www.youtube.com/embed/EbMCOZzpRpw?start=85&end=300" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
 
-         <!--  <p class="subsubHead">Building a Normal Queue:</p> -->
+         <!--  <p class="sub-heading-2">Building a Normal Queue:</p> -->
         
-          <!-- <p class="subsubHead">Building a Linear Queue:</p> -->
+          <!-- <p class="sub-heading-2">Building a Linear Queue:</p> -->
             
          
 
@@ -1034,7 +1033,7 @@ textarea{
       </div>
 
        <div class="pseudoCode sideShadow">
-          <div class="subHead">Pseudo Code:</div>
+          <div class="sub-heading-1">Pseudo Code:</div>
             <div class="content">
               
               <p>
@@ -1053,7 +1052,7 @@ textarea{
         </div> 
 
       <div class="code_bg">
-        <div class="subHead">COMPLETE CODE</div>
+        <div class="sub-heading-1">COMPLETE CODE</div>
         <div class="content">
         <!--   <p> How about first trying by yourself without reading the code we provide? </p> -->
           
@@ -1183,7 +1182,7 @@ textarea{
           </div>  
           </div>
            <div class="content">
-             <!--  <div class="subsubHead">Code Discussion</div> -->
+             <!--  <div class="sub-heading-2">Code Discussion</div> -->
               <!-- <ol>
                 <li>We pass the given array to be sorted, lo and hi as parameters to the function mergeSort. Here lo is the index 0 at the beginning of the array and hi is the index arr.length-1 at the end of the array.</li>
                 <li><b>Base Case: </b> If at any time lo and hi cross each other then an array of size 1 is formed and stores the element at lo (or hi) .This array is then returned.</li>
@@ -1191,13 +1190,13 @@ textarea{
                 <li>Then we recursively call the function mergeSort on the first array, which then returns us a sorted array (By our Faith).</li>
                 <li> Similarly we recursively call the function mergeSort on the second array, which then returns us  a sorted array (By our Faith).</li>
                 <li> When we have 2 sorted arrays available to us, we merge them together to give us a single sorted array as we already know from the previous question of “Merge 2 Sorted Arrays”.</li>
-                  <div class="video">
+                  <div class="youtube-video">
                     <iframe width="560" height="315" src="https://www.youtube.com/embed/WMxNhIBA92I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                   </div>
                 <li>Now that we have this merged sorted array with us we return it as the answer.</li>
               </ol> -->
               <p>Dear reader, if you have any doubts regarding the code shown above, you may refer to the complete solution video to clear all your doubts. Now, let us discuss the time and space complexities of all of the above methods.</p>
-                <div class="video">
+                <div class="youtube-video">
                     <iframe width="640" height="360" src="https://www.youtube.com/embed/EbMCOZzpRpw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
 
@@ -1206,7 +1205,7 @@ textarea{
 
           
       <div class="analysis">
-        <div class="subHead">Analysis</div>
+        <div class="sub-heading-1">Analysis</div>
         <div class="timeComplex">
          <!--  <div class="content">
           	 <p>Now that we have discussed the algorithm, let’s analyze it too. </p>
@@ -1222,11 +1221,11 @@ textarea{
                 <div class="img"><img src="./images/image8.png" alt="img" /></div>
               <p>At the end we see in figure 8 that all the elements less than equal to pivot are at the left side and the elements greater than the pivot are at the right side. Here the loop comes to an end when i goes to an index beyond the array and all the unknown elements are now known.</p>
               <p>We highly suggest you watch the video “Partition An Array”[ 3:05-9:57] for a better understanding of this iteration.</p>
-              <div class="video">
+              <div class="youtube-video">
                   <iframe width="560" height="315" src="https://www.youtube.com/embed/if40LxQ8_Xo?start=185&end=597" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
               </div>
           </div> -->
-          <div class="subsubHead">Time Complexity</div>
+          <div class="sub-heading-2">Time Complexity</div>
           <div class="content">
             
             <p><b>Add: </b>The time complexity is O(1) because we have used the stack push method.</p>
@@ -1240,7 +1239,7 @@ textarea{
           </div>
         </div>
        <!--  <div class="spaceComplex">
-          <div class="subsubHead">Space Complexity</div>
+          <div class="sub-heading-2">Space Complexity</div>
           <div class="content">
             
             <p>
@@ -1253,7 +1252,7 @@ textarea{
       </div>
 
       <div class="content">
-        <!-- <div class="subsubHead">Extra Gyaan(Knowledge):</div> -->
+        <!-- <div class="sub-heading-2">Extra Gyaan(Knowledge):</div> -->
        <!--  <p>This question can be asked in many ways, by changing 0,1 and 2 like:</p>
         <p>
           <ol>
@@ -1269,33 +1268,33 @@ textarea{
         <!-- <p>So reader, we hope you understood the solution of this problem successfully. Don’t worry if you are not able to understand this problem or you were not able to solve this problem by yourself initially.</p> -->
         <!-- <p>Just spend more time reading and thinking about it. </p> -->
         <!-- <p>However, if you still face any difficulties in the solution for the problem, you may visit the complete <a href="https://youtu.be/SVFXEqn3Ceo" target="_blank">solution video</a>.</p> -->
-        <!-- <div class="video">
+        <!-- <div class="youtube-video">
           <iframe width="560" height="315" src="https://www.youtube.com/embed/hMJAlbJIS7E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div> -->
         <!-- <p>We will see you again in the next problem. Till then, keep solving and learning  more problems.</p> -->
         <!-- <p>So dear reader, did you get this problem completely? We recommend you again to solve the GET MAZE PATHS WITH JUMPS problem as well. We also recommend you to watch its <a href="https://www.youtube.com/watch?v=VaGBRiSdtFI&list=PL-Jc9J83PIiFxaBahjslhBD1LiJAV7nKs&index=33" target="_blank">complete solution video</a>  and <a href="https://youtu.be/zri_tftYphE?list=PL-Jc9J83PIiFxaBahjslhBD1LiJAV7nKs" target="_blank">the complete solution video</a> of this problem to clear the difference between the “get” and “print” problems in general.</p>
-        <div class="video">
+        <div class="youtube-video">
           <iframe width="560" height="315" src="https://www.youtube.com/embed/F6T3tD8Pw20" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-        <div class="video">
+        <div class="youtube-video">
           <iframe width="560" height="315" src="https://www.youtube.com/embed/zri_tftYphE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div> -->
        <!--  <p>It would be an extreme pleasure if this article was helpful to you.</p>
         <p>Our desire to make you learn will remain unsatisfactory if you still have doubts. We strongly recommend you to watch our video lecture on Sort Dates for clearing any type of doubts.</p>
-        <div class="video">
+        <div class="youtube-video">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/YdzCuP6LwVg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <p>Suggestions and feedback are always welcomed. You can contact us via <a href="https://www.pepcoding.com/" target="_blank">our website</a>.</p>
         <p>Just don’t burden yourself; there is a lot to come. This is merely the beginning. Keep trying more and more problems.</p> -->
         <p> We hope that you got the solution completely and also understood that making add efficient will increase the time for peek and remove methods. If you still have any doubts, you may refer to the complete solution video to clear all of them.</p>
-        <div class="video">
+        <div class="youtube-video">
             <iframe width="640" height="360" src="https://www.youtube.com/embed/EbMCOZzpRpw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <!-- <p>Till then, Goodbye !</p> -->
         <!-- <p>Happy coding!</p> -->
       </div>
       <div class="content">
-        <div class="subsubHead">Some Suggestions:</div>
+        <div class="sub-heading-2">Some Suggestions:</div>
           <div class="content">
             <p>Here are some suggestions from our side that you do not want to miss:</p>
             <ol>
@@ -1308,7 +1307,7 @@ textarea{
           </div>
       </div> 
       <!-- <div class="refrences">
-        <div class="subHead">References</div>
+        <div class="sub-heading-1">References</div>
         <div class="content">
           <div class="refrence">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
@@ -1333,7 +1332,7 @@ textarea{
         <div class="prevBtn"><i class="fas fa-less-than"></i>Back</div>
       </div>
 
-      <div class="tags">
+      <div class="article-tags">
         <div class="tag">Functions</div>
         <div class="tag"> Arrays </div>
         <div class="tag">Java</div>
@@ -1349,7 +1348,7 @@ textarea{
              
       </div>      
       <div class="author">
-        <div class="subHead">AUTHOR</div>
+        <div class="sub-heading-1">AUTHOR</div>
         <div class="authorDetails">
           <div class="dummy"><img src="./images/dummy.jpg" alt="" /></div>
           <div class="details">
@@ -1369,7 +1368,7 @@ textarea{
         </div>
       </div>
 
-        <div class="lineBreak" style="margin-top: 30px;"></div>
+        <div class="article-divider" style="margin-top: 30px;"></div>
 
         <div class="imgZoomDiv">
           <div class="imgZoomDivCloseBtn"><i class="fas fa-times"></i></div>
