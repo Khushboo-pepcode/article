@@ -89,20 +89,22 @@
                <p>In  a normal stack, we had a “tos” (top of the stack) pointer which kept on increasing as we kept on pushing into the stack.</p>
                <p>Now that we have to form 2 stacks we will keep two tos.</p>
                <p>We keep tos1 at -1 index and tos2 at data.length index (see figure1).</p>
-                <div class="img"><img src="./images/image1.png" alt="img" /></div>
+                <div class="img"><img src="./images/image1.PNG" alt="img" /></div>
                <p>So, our first stack starts from the start of the stack and the second stack starts from the end of the stack.</p>
                <p>If we have to push2 20 and then push1 10 in the respective stacks then it would look like as shown in figure 2. Here tos2 will decrease by an index and tos1 will increase by an index.</p>
-                <div class="img"><img src="./images/image2.png" alt="img" /></div>
+                <div class="img"><img src="./images/image2.PNG" alt="img" /></div>
                <p>After Figure 2, try to write how would the pushing take place if following commands are to be performed :</p> 
-                <div class="img"><img src="./images/image3.png" alt="img" /></div>
+                <div class="img"><img src="./images/image3.PNG" alt="img" /></div>
 
                <p>The array would look like figure 4.</p>
-                <div class="img"><img src="./images/image4.png" alt="img" /></div>
+                <div class="img"><img src="./images/image4.PNG" alt="img" /></div>
+              <p>Now if we want to Push1 60 then we won’t be able to do so because together, both the stacks have filled the entire array.</p>
+              <p>From figure 4, we can also say if <b>tos2=tos1+1 then no more elements can be pushed</b> and stacks have been overflowed.</p>
 
 
             </div>
         </div>
-        <div class="pseudoCode article-box-shadow">
+        <!-- <div class="pseudoCode article-box-shadow">
             <div class="sub-heading-1">Pseudo Code:</div>
             <div class="content">
                 <ol>
@@ -121,84 +123,139 @@
                 </ol>
                 
             </div>
-        </div>
+        </div> -->
         <div class='codeEditor' id=>
             <div class='editorialCode'>
-               import java.io.*;
-                import java.util.*;
-                 
-                public class Main {
-                 
-                  public static class StackToQueueAdapter {
-                    Stack< Integer> mainS;
-                    Stack< Integer> helperS;
-                 
-                    public StackToQueueAdapter() {
-                      mainS = new Stack< >();
-                      helperS = new Stack< >();
-                    }
-                 
-                    int size() {
-                      return mainS.size();
-                    }
-                 
-                    void add(int val) {
-                      while(mainS.size() > 0){
-                        helperS.push(mainS.pop());
-                      }
-                 
-                      mainS.push(val);
-                 
-                      while(helperS.size() > 0){
-                        mainS.push(helperS.pop());
-                      }
-                    }
-                 
-                    int remove() {
-                      if (size() == 0) {
-                        System.out.println("Queue underflow");
-                        return -1;
-                      } else {
-                        return mainS.pop();
-                      }
-                    }
-                 
-                    int peek() {
-                      if (size() == 0) {
-                        System.out.println("Queue underflow");
-                        return -1;
-                      } else {
-                        return mainS.peek();
-                      }
+              import java.io.*;
+              import java.util.*;
+               
+              public class Main {
+               
+                public static class TwoStack {
+                  int[] data;
+                  int tos1;
+                  int tos2;
+               
+                  public TwoStack(int cap) {
+                    data=new int[cap];
+                    tos1=-1;
+                    tos2=data.length;
+                  }
+               
+                  int size1() {
+                    return tos1+1;
+                  }
+               
+                  int size2() {
+                    return data.length-tos2;
+                  }
+               
+                  void push1(int val) {
+                    if(tos2==tos1+1){
+                        System.out.println("Stack overflow");
+                        
+                    }else{
+                        tos1++;
+                        data[tos1]=val;
                     }
                   }
-                 
-                  public static void main(String[] args) throws Exception {
-                    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-                    StackToQueueAdapter qu = new StackToQueueAdapter();
-                 
-                    String str = br.readLine();
-                    while (str.equals("quit") == false) {
-                      if (str.startsWith("add")) {
-                        int val = Integer.parseInt(str.split(" ")[1]);
-                        qu.add(val);
-                      } else if (str.startsWith("remove")) {
-                        int val = qu.remove();
-                        if (val != -1) {
-                          System.out.println(val);
-                        }
-                      } else if (str.startsWith("peek")) {
-                        int val = qu.peek();
-                        if (val != -1) {
-                          System.out.println(val);
-                        }
-                      } else if (str.startsWith("size")) {
-                        System.out.println(qu.size());
-                      }
-                      str = br.readLine();
+               
+                  void push2(int val) {
+                    if(tos2==tos1+1){
+                        System.out.println("Stack overflow");
+                        
+                    }else{
+                        tos2--;
+                        data[tos2]=val;
+                    }
+                  }
+               
+                  int pop1() {
+                    if(size1()==0){
+                        System.out.println("Stack underflow");
+                        return -1;
+                        
+                    }else{
+                        int val=data[tos1];
+                        tos1--;
+                        return val;
+                    }
+                  }
+               
+                  int pop2() {
+                    if(size2()==0){
+                        System.out.println("Stack underflow");
+                        return -1;
+                    }else{
+                        int val=data[tos2];
+                        tos2++;
+                        return val;
+                    }
+                  }
+               
+                  int top1() {
+                    if(size1()==0){
+                        System.out.println("Stack underflow");
+                        return -1;
+                    }else{
+                        int val=data[tos1];
+                        return val;
+                    }
+                  }
+               
+                  int top2() {
+                    if(size2()==0){
+                        System.out.println("Stack underflow");
+                        return -1;
+                    }else{
+                        int val=data[tos2];
+                        return val;
                     }
                   }
                 }
+               
+                public static void main(String[] args) throws Exception {
+                  BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+                  int n = Integer.parseInt(br.readLine());
+                  TwoStack st = new TwoStack(n);
+               
+                  String str = br.readLine();
+                  while (str.equals("quit") == false) {
+                    if (str.startsWith("push1")) {
+                      int val = Integer.parseInt(str.split(" ")[1]);
+                      st.push1(val);
+                    } else if (str.startsWith("pop1")) {
+                      int val = st.pop1();
+                      if (val != -1) {
+                        System.out.println(val);
+                      }
+                    } else if (str.startsWith("top1")) {
+                      int val = st.top1();
+                      if (val != -1) {
+                        System.out.println(val);
+                      }
+                    } else if (str.startsWith("size1")) {
+                      System.out.println(st.size1());
+                    } else if (str.startsWith("push2")) {
+                      int val = Integer.parseInt(str.split(" ")[1]);
+                      st.push2(val);
+                    } else if (str.startsWith("pop2")) {
+                      int val = st.pop2();
+                      if (val != -1) {
+                        System.out.println(val);
+                      }
+                    } else if (str.startsWith("top2")) {
+                      int val = st.top2();
+                      if (val != -1) {
+                        System.out.println(val);
+                      }
+                    } else if (str.startsWith("size2")) {
+                      System.out.println(st.size2());
+                    }
+                    str = br.readLine();
+                  }
+                }
+              }
 
             </div>
             <pre class='output'>
@@ -207,11 +264,48 @@
             <span type='text' style='width:40%' class='canRunCode' name='canRunCode'>true</span>";
         </div>
         <div class="content">
-            <p>Dear reader, we hope that you got the solution and the code. Still, if you have any doubts regarding the solution or the code you may watch the complete solution video to understand the concept properly.
+          <div class="sub-heading-2">CODE DISCUSSION</div>
+            <p>We try to discuss each function one by one.
             </p>
-            <div class="youtube-video">
-                <iframe width="640" height="360" src="https://www.youtube.com/embed/J8EejK8zvw8?" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
+                <div class="img"><img src="./images/image5.PNG" alt="img" /></div>
+            <p>We have already been provided the above information in our question.</p>
+            <p><b>CONSTRUCTOR-</b></p>
+                <div class="img"><img src="./images/image6.PNG" alt="img" /></div>
+                <div class="img"><img src="./images/image7.PNG" alt="img" /></div>
+
+            <p>We make an array “data” of the given length “cap” and assign tos1 and tos2 with -1 and data.length respectively.</p>   
+
+            <p><b>PUSH-</b></p>
+            <p>Push 1</p>
+                <div class="img"><img src="./images/image8.PNG" alt="img" /></div>
+            <p>As already discussed in “What” if tos2==tos1+1 then we print Stack overflowed. Else we increase “tos1” by an index and store the given value to that index in the array.</p>   
+            <p>Push2-</p> 
+                <div class="img"><img src="./images/image9.PNG" alt="img" /></div>
+            <p>Similarly, if tos2==tos1+1 then we print Stack overflowed. Else we decrease “tos2” by an index and store the given value to that index in the array.</p>
+            
+            <p><b>SIZE-</b></p> 
+            <p>size1-</p>   
+                <div class="img"><img src="./images/image11.PNG" alt="img" /></div>
+            <p>As seen from figure 4, the first stack is from index 0 to index 2 hence the size of the stack1 is 3 i.e. tos1+1.</p>  
+            <p>size2-</p> 
+                <div class="img"><img src="./images/image12.PNG" alt="img" /></div>
+            <p>Similarly, as seen from figure 4, the second stack is from index 4 to index 3 hence the size of the stack2 is 2 i.e. 5-3 or data.length-tos2.</p>    
+
+            <p><b>TOP-</b></p>
+            <p>top1-</p>
+                <div class="img"><img src="./images/image13.PNG" alt="img" /></div>
+            <p>As seen from figure 4, if stack1 is empty then there is no top value. Else we return the value at tos1.</p> 
+            <p>top2-</p>
+                <div class="img"><img src="./images/image14.PNG" alt="img" /></div>
+            <p>Similarly, if stack2 is empty then there is no top value. Else we return the value at tos2.</p>  
+            <p><b>POP-</b></p>  
+            <p>pop1-</p>
+                <div class="img"><img src="./images/image15.PNG" alt="img" /></div>
+            <p>If stack1 is empty then no value can be popped. Else, as we have seen in the “What” section, the value at tos1 is returned and tos1 is decreased by an index.</p>    
+            <p>pop2-</p>
+                <div class="img"><img src="./images/image16.PNG" alt="img" /></div>
+            <p>Similarly, if stack2 is empty then no value can be popped. Else, the value at tos2 is returned and tos2 is increased by an index.</p>
+            <p>We have written all the required functions.</p>    
         </div>
        <!--  <div class="sub-heading-2">{{!--sample testcase heading--}}</div>
         <div class="content">
@@ -224,28 +318,37 @@
                 <p>Time  and Space Complexity Analysis:</p>
             </div>
             <div class="sub-heading-2">Time Complexity:</div>
-              <ol>
-                <li>Add: The time complexity is O(n) as we are popping all the values from the main stack and pushing them into the helper stack and doing vice-versa. So, the time complexity becomes n+n=2n=O(n).</li>
-                <li>Remove: The time complexity for this method is O(1) as we just popped a value from the main stack.</li>
-                <li>Size: The time complexity is O(1) as we just return the size of the main stack.</li>
-                <li>Peek: The time complexity is O(1) as we just use the peek method of the main stack.</li>
-
-              </ol>
-              <p>So, dear reader, we hope that you have understood the entire solution and the code as well as the time and space complexity analysis. If you still have any doubts you may refer to the complete solution video to clear all your doubts.</p>
+            <div class="content">
+              <p><b>O(1)</b></p>
+              <p>According to the question, all the functions are coded in constant time.</p>
             
+            </div>
+
+            <div class="sub-heading-2">SPACE COMPLEXITY:</div>
+            <div class="content">
+              <p><b>O(n)</b></p>
+              <p>Since space is used optimally and stacks require n space, therefore, the complexity is linear.</p>
+            </div>
+        </div>
+        <div class="content">
+          <p>Now, we suggest you watch the solution video if there are any gaps in your understanding.</p>
+          <div class="youtube-video">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/S4mBBDfvWCE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <p>Here, we conclude our article. This was the last question under “Stacks and Queues”. Next we will start with a new topic of “Linked Lists” so don’t forget to check it out. For now, Goodbye.</p>
         </div>
        
         <div class="article-tags">
-            <div class="tag">Functions and Arrays</div>
-            <div class="tag">Classes and Objects in Java</div>
-            <div class="tag">Stacks and Queues.</div>
+            <div class="tag">Stack</div>
+            <div class="tag">Arrays</div>
+            
         </div>
         <div class="author">
             <div class="sub-heading-1">AUTHOR</div>
             <div class="article-contributor">
                 <div class="dummy"><img src="{{!--article contributor image--}}" alt="" /></div>
                 <div class="details">
-                    <span> <a href="{{!--article contributor linkedin profile--}}">Guneet Malhotra</a></span>
+                    <span> <a href="">Shreeya Gupta</a></span>
                 </div>
             </div>
         </div>
