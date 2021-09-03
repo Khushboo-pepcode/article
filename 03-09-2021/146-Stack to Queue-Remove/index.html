@@ -930,441 +930,282 @@ textarea{
 
   </head>
   <body>
-      <div class="landingPg">
-        <div class="Circles">
-          <div class="c1"></div>
-          <div class="c2"></div>
+            <div class="article1">
+    <div class="article-1-outerbox">
+        <div class="Circles hide-on-med-and-down">
+            <div class="c1"></div>
+            <div class="c2"></div>
         </div>
-      <div class="topic-name">
-        <p>Stack to Queue Adapter- Remove Efficient</p>
-      </div>
-      <a class="ca3-scroll-down-link ca3-scroll-down-arrow" data-ca3_iconfont="ETmodules" data-ca3_icon="">
-        <i class="fas fa-chevron-down"></i>
-    </a>
-
-      <div class="qoute">
-        <p>
-         Programs must be written for the people to be read and only incidentally for machines to execute
-          <!-- <br>
-          ~Steve McConnell -->
-        </p>
-      </div>
+        <div class="topic-name">
+            <p>Stack to Queue Adapter- Remove Efficient</p> 
+        </div>
+        <a class="ca3-scroll-down-link ca3-scroll-down-arrow " data-ca3_iconfont="ETmodules" data-ca3_icon="">
+            <i class="fa fa-chevron-down"></i>
+        </a>
+        <br><br><br><br>
+        <div class="qoute">
+            <br><br>
+            <p>
+                Programs must be written for the people to be read and only incidentally for machines to execute
+            </p>
+            <i class="fa fa-quote-right qoute-icon"></i>
+        </div>
     </div>
-    <div class="questionLogo"><i class="fab fa-quora"></i></div>
+    <div class="question-logo"><i class="fa fa-quora"></i></div>
     <div class="ques-info">Stack to Queue Adapter- Remove Efficient</div>
-    <div class="wrapper">
-      <div class="article-divider" style="margin-top:0px ;"></div>
-      <div class="article-content">
-        <p>Welcome back, dear reader. So, how is it going? We hope that you have solved the previous question: <a href="https://www.pepcoding.com/resources/online-java-foundation/stacks-and-queues/stack-to-queue-adapter-add-efficient-official/ojquestion" target="_blank">STACK TO QUEUE ADAPTER: ADD-EFFICIENT</a> . We recommend you solve this problem first as this problem is very similar to the previous one. So, let’s discuss this problem. 
-           
-          <br>
-          Important links:<!--  <a href="https://www.pepcoding.com/resources/online-java-foundation/time-and-space-complexity/pivot-sorted-rotated-array-official/ojquestion" target="_blank"> Problem</a>,   --><a href="https://www.youtube.com/watch?v=tL1G0YX0ZZM" target="_blank"> Question video</a>,  <a href="https://youtu.be/J8EejK8zvw8" target="_blank"> Solution video</a>.
-        </p>
-          
-      </div>
-
-      <div class="understandingProb">
-        <div class="sub-heading-1">
-          <p>UNDERSTANDING THE PROBLEM</p>
-        </div>
-        <div class="content">
-          <p> We are given two stacks, one is the main stack and the other is the helper stack. We have to adapt them and make them behave like a queue. Also, we have to take care that the <b>remove</b>method of the queue is efficient i.e. it should be achieved in O(1) time complexity whereas the <b>add</b> method can take O(n) time. If you have solved the previous problem then this is just a piece of cake for you.</p>
-          
-          <p>You may refer to the <a href="https://www.youtube.com/watch?v=tL1G0YX0ZZM" target="_blank">question video</a> to understand the problem completely. The main challenge of this question is to convert the LIFO nature of the stack to the FIFO nature of the queue.</p>
-          <div class="youtube-video">
-              <iframe width="640" height="360" src="https://www.youtube.com/embed/tL1G0YX0ZZM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div> 
-        </div>
-      </div>
-
-      <div class="approach" id="approach">
-        <div class="sub-heading-1">APPROACH</div>
-        <!-- <div class="sub-heading-2">Deducing Algorithm</div> -->
-        <div class="content">
-          
-          <ol>
-            <li><b>Add: </b>Let us consider the following example.
-                <div class="img"><img src="./images/image1.png" alt="img" /></div>
-             
-          We have to add these elements to the queue. If we simply add these elements to the main stack then it will be analogous to add them in a queue as adding the elements to the end of the queue is analogous to adding the elements at the top of the stack (see fig-2).
-
-              <div class="img"><img src="./images/image2.png" alt="img" /></div>
-           This is what we did in the previous question when we had to make the add method efficient without taking care of the remove method. Here, the situation is exactly the opposite. If you notice, when we try to remove an element from the queue, we will not be able to remove the element in O(1) time (You know this from the previous question). So, it is clear that we will not insert the elements in this way. So, the question is, how are we going to insert the elements?
-
-             <div class="img"><img src="./images/image3.png" alt="img" /></div>
-
-           We are trying to insert the same elements as shown above step by step. So, we have inserted the first element 10 into the main stack. Our aim is that when we pop from the main stack, we should get the element at the front of the queue. Why? Well obviously, to make the remove function efficient. If we see in this case the front of the queue is at the top of the main stack. So, there is no problem.
-             <div class="img"><img src="./images/image4.png" alt="img" /></div>
-            Now we try to add 20 into the queue. So, if we push 20 into the main stack, then the top of the main stack will contain the rear element of the queue rather than the front. So, we pop out all the contents of the main stack and push it into the helper stack. Then, we push the value i.e. 20 into the main stack and pop all the values from the helper stack, and push them into the main stack. We find that the main stack now has the front element of the queue at its top and whenever we try to remove it from the queue, we will be able to remove the front element easily by popping the value from the main stack.  We will keep on doing this and after all the elements are   added, our stacks will look like this: 
-             <div class="img"><img src="./images/image5.png" alt="img" /></div>
-            <b>So, finally, we conclude that to add an element to the queue we will pop out all the elements present in the main stack and push them into the helper stack and then push the given element into the main stack and again pop out all the values from the helper stack and push them into the main stack.</b>
-            <br>
-            You may refer to the solution video (0:29-2:16) if you have any doubts regarding the add method.
-            <div class="youtube-video">
-              <iframe width="640" height="360" src="https://www.youtube.com/embed/J8EejK8zvw8?start=29&end=136" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div class="article-info">
+        <div class="article-divider" style="margin-top:0px ;"></div>
+        <div class="article-content">
+            <div class="sub-heading-1">
+                <p>Introduction:</p>
             </div>
-            </li>
-            <li><b>Size: </b> The size of the queue will be equal to the size of the main stack at any particular time. So, it is going to be very easy. We just have to return the size of the main stack.
-               
-            </li>
-            <li><b>Peek: </b>As we have already discussed, we have added the elements in such a way that the element at the front of the queue will be at the top of the stack. So, we just have to apply the peek method to the main stack which will return the topmost element of the stack i.e. q[front] (see fig-6).
-
-             
-             <div class="img"><img src="./images/image6.png" alt="img" /></div>
-            
-            </li>
-
-          <li><b>Remove:</b> Again, we did all the hard work in the add function to make the remove method efficient. So, we know that we just have to pop the element from the main stack to remove an element from the queue (removing the element at the front in the queue). 
-            <div class="img"><img src="./images/image7.png" alt="img" /></div>
-          </li>
-
-          </ol>
-          <p>Now that we have understood every method in-depth, let us move to code the solution.</p>
-           
-
-         <!--  <p class="sub-heading-2">Building a Normal Queue:</p> -->
-        
-          <!-- <p class="sub-heading-2">Building a Linear Queue:</p> -->
-            
-         
-
-         
-          
-               
-        </div>
-      </div>
-
-       <div class="pseudoCode sideShadow">
-          <div class="sub-heading-1">Pseudo Code:</div>
             <div class="content">
-              
-              <p>
-                <ol>
-                  <li><b>Add:</b>
-                    We will not implement the add method directly. Rather, we will first pop all the elements from the main stack and push them into the helper stack. Then, we will add the new element to the main stack and pop all the elements from the helper stack, and push them to the main stack.
-                  </li>
-                  <li><b>Peek:</b>  We will use the peek method of the stack and it will give us the top value of the main stack. This will be the same as the front value of the queue.</li>
-                  <li><b>Size:</b>   It is also very simple. Just return the size of the main stack. 
-                  </li>
-                  <li><b>Remove:</b> Simply pop a value from the main stack. This will remove the value from the front of the queue.
-                  </li>
-                </ol>
-              </p>
+                <p>
+                    Welcome back, dear reader. So, how is it going? We hope that you have solved the previous question: <a href="https://www.pepcoding.com/resources/online-java-foundation/stacks-and-queues/stack-to-queue-adapter-add-efficient-official/ojquestion" target="_blank">STACK TO QUEUE ADAPTER: ADD-EFFICIENT</a>. We recommend you solve this problem first as this problem is very similar to the previous one. So, let’s discuss this problem. 
+                </p>
             </div>
-        </div> 
-
-      <div class="code_bg">
-        <div class="sub-heading-1">COMPLETE CODE</div>
-        <div class="content">
-        <!--   <p> How about first trying by yourself without reading the code we provide? </p> -->
-          
-         
+           
         </div>
-        <div id="editor1_wrapper" class="app_editor_wrapper">
-            <div id="editor1" class="app_editor">
+        <div class="understandingProb">
+            <div class="sub-heading-1">
+                <p>Problem Explanation:</p>
+            </div>
+            <div class="content">
+                <p>
+                    We are given two stacks, one is the main stack and the other is the helper stack. We have to adapt them and make them behave like a queue. Also, we have to take care that the remove method of the queue is efficient i.e. it should be achieved in O(1) time complexity whereas the add method can take O(n) time. If you have solved the previous problem then this is just a piece of cake for you.
+                    <br>
+                    You may refer to the question video to understand the problem completely. The main challenge of this question is to convert the LIFO nature of the stack to the FIFO nature of the queue.
+                </p>
+                <div class="youtube-video">
+                  <iframe width="640" height="360" src="https://www.youtube.com/embed/tL1G0YX0ZZM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="approach" id="approach">
+            <div class="sub-heading-1">Approach:</div>
+            <div class="content">
+               <ol>
+                    <li>
+                        Add: Let us consider the following example.
+                        <div class="img"><img src="./images/image1.png" alt="img" /></div>
+                        We have to add these elements to the queue. If we simply add these elements to the main stack then it will be analogous to add them in a queue as adding the elements to the end of the queue is analogous to adding the elements at the top of the stack (see fig-2).
+                        <div class="img"><img src="./images/image2.png" alt="img" /></div>
+                        This is what we did in the previous question when we had to make the add method efficient without taking care of the remove method. Here, the situation is exactly the opposite. If you notice, when we try to remove an element from the queue, we will not be able to remove the element in O(1) time (You know this from the previous question). So, it is clear that we will not insert the elements in this way. So, the question is, how are we going to insert the elements?
+                        <div class="img"><img src="./images/image3.png" alt="img" /></div>
+                        We are trying to insert the same elements as shown above step by step. So, we have inserted the first element 10 into the main stack. Our aim is that when we pop from the main stack, we should get the element at the front of the queue. Why? Well obviously, to make the remove function efficient. If we see in this case the front of the queue is at the top of the main stack. So, there is no problem.
+
+                        <div class="img"><img src="./images/image4.png" alt="img" /></div>
+                        Now we try to add 20 into the queue. So, if we push 20 into the main stack, then the top of the main stack will contain the rear element of the queue rather than the front. So, we pop out all the contents of the main stack and push it into the helper stack. Then, we push the value i.e. 20 into the main stack and pop all the values from the helper stack, and push them into the main stack. We find that the main stack now has the front element of the queue at its top and whenever we try to remove it from the queue, we will be able to remove the front element easily by popping the value from the main stack.  We will keep on doing this and after all the elements are   added, our stacks will look like this:
+
+                        <div class="img"><img src="./images/image5.png" alt="img" /></div>
+                        So, finally, we conclude that to add an element to the queue we will pop out all the elements present in the main stack and push them into the helper stack and then push the given element into the main stack and again pop out all the values from the helper stack and push them into the main stack.
+                        You may refer to the solution video (0:29-2:16) if you have any doubts regarding the add method.
+                        <div class="youtube-video">
+                          <iframe width="560" height="315" src="https://www.youtube.com/embed/J8EejK8zvw8?start=29&end=136" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </li>
+                    <li>
+                        Size: The size of the queue will be equal to the size of the main stack at any particular time. So, it is going to be very easy. We just have to return the size of the main stack.
+
+                    </li>
+                    <li>
+                       Peek: As we have already discussed, we have added the elements in such a way that the element at the front of the queue will be at the top of the stack. So, we just have to apply the peek method to the main stack which will return the topmost element of the stack i.e. q[front] (see fig-6).
+                       <div class="img"><img src="./images/image6.png" alt="img" /></div>
+                    </li>
+                    <li>
+                        Remove: Again, we did all the hard work in the add function to make the remove method efficient. So, we know that we just have to pop the element from the main stack to remove an element from the queue (removing the element at the front in the queue). 
+                        <div class="img"><img src="./images/image7.png" alt="img" /></div>
+                        Now that we have understood every method in-depth, let us move to code the solution.
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="pseudoCode article-box-shadow">
+            <div class="sub-heading-1">Pseudo Code:</div>
+            <div class="content">
+                <ol>
+                    <li>
+                        Add: We will not implement the add method directly. Rather, we will first pop all the elements from the main stack and push them into the helper stack. Then, we will add the new element to the main stack and pop all the elements from the helper stack, and push them to the main stack.
+
+                    </li>
+                    <li>
+                        Peek: We will use the peek method of the stack and it will give us the top value of the main stack. This will be the same as the front value of the queue.
+                    </li>
+                    <li>
+                      Size: It is also very simple. Just return the size of the main stack.
+
+                    </li>
+                    <li>iRemove: Simply pop a value from the main stack. This will remove the value from the front of the queue.</li>
+                </ol>
+                
+            </div>
+        </div>
+        <div class='codeEditor' id=>
+            <div class='editorialCode'>
                import java.io.*;
-                  import java.util.*;
-                   
-                  public class Main {
-                   
-                    public static class StackToQueueAdapter {
-                      Stack< Integer> mainS;
-                      Stack< Integer> helperS;
-                   
-                      public StackToQueueAdapter() {
-                        mainS = new Stack< >();
-                        helperS = new Stack< >();
+                import java.util.*;
+                 
+                public class Main {
+                 
+                  public static class StackToQueueAdapter {
+                    Stack< Integer> mainS;
+                    Stack< Integer> helperS;
+                 
+                    public StackToQueueAdapter() {
+                      mainS = new Stack< >();
+                      helperS = new Stack< >();
+                    }
+                 
+                    int size() {
+                      return mainS.size();
+                    }
+                 
+                    void add(int val) {
+                      while(mainS.size() > 0){
+                        helperS.push(mainS.pop());
                       }
-                   
-                      int size() {
-                        return mainS.size();
-                      }
-                   
-                      void add(int val) {
-                        while(mainS.size() > 0){
-                          helperS.push(mainS.pop());
-                        }
-                   
-                        mainS.push(val);
-                   
-                        while(helperS.size() > 0){
-                          mainS.push(helperS.pop());
-                        }
-                      }
-                   
-                      int remove() {
-                        if (size() == 0) {
-                          System.out.println("Queue underflow");
-                          return -1;
-                        } else {
-                          return mainS.pop();
-                        }
-                      }
-                   
-                      int peek() {
-                        if (size() == 0) {
-                          System.out.println("Queue underflow");
-                          return -1;
-                        } else {
-                          return mainS.peek();
-                        }
+                 
+                      mainS.push(val);
+                 
+                      while(helperS.size() > 0){
+                        mainS.push(helperS.pop());
                       }
                     }
-                   
-                    public static void main(String[] args) throws Exception {
-                      BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-                      StackToQueueAdapter qu = new StackToQueueAdapter();
-                   
-                      String str = br.readLine();
-                      while (str.equals("quit") == false) {
-                        if (str.startsWith("add")) {
-                          int val = Integer.parseInt(str.split(" ")[1]);
-                          qu.add(val);
-                        } else if (str.startsWith("remove")) {
-                          int val = qu.remove();
-                          if (val != -1) {
-                            System.out.println(val);
-                          }
-                        } else if (str.startsWith("peek")) {
-                          int val = qu.peek();
-                          if (val != -1) {
-                            System.out.println(val);
-                          }
-                        } else if (str.startsWith("size")) {
-                          System.out.println(qu.size());
-                        }
-                        str = br.readLine();
+                 
+                    int remove() {
+                      if (size() == 0) {
+                        System.out.println("Queue underflow");
+                        return -1;
+                      } else {
+                        return mainS.pop();
+                      }
+                    }
+                 
+                    int peek() {
+                      if (size() == 0) {
+                        System.out.println("Queue underflow");
+                        return -1;
+                      } else {
+                        return mainS.peek();
                       }
                     }
                   }
-
-
-
+                 
+                  public static void main(String[] args) throws Exception {
+                    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+                    StackToQueueAdapter qu = new StackToQueueAdapter();
+                 
+                    String str = br.readLine();
+                    while (str.equals("quit") == false) {
+                      if (str.startsWith("add")) {
+                        int val = Integer.parseInt(str.split(" ")[1]);
+                        qu.add(val);
+                      } else if (str.startsWith("remove")) {
+                        int val = qu.remove();
+                        if (val != -1) {
+                          System.out.println(val);
+                        }
+                      } else if (str.startsWith("peek")) {
+                        int val = qu.peek();
+                        if (val != -1) {
+                          System.out.println(val);
+                        }
+                      } else if (str.startsWith("size")) {
+                        System.out.println(qu.size());
+                      }
+                      str = br.readLine();
+                    }
+                  }
+                }
 
             </div>
-          </div>
-          <br><br><br>
-          <div class="code_tabBar">
-            <div style="color: rgba(0, 0, 0, 1);" id="tabBar_0" onclick="tabBar(0)" class="tabBar_btn">input</div>
-            <div id="tabBar_1" onclick="tabBar(1)" class="tabBar_btn">output</div>
-            <div>
-                <form class="language_dropdown">
-                    <select id="language" style="height: 30px;">
-                    <option value = "c_cpp"> C++ 
-                    </option>
-                    <option value = "java"> Java 
-                    </option>
-                    <option value = "python"> Python
-                    </option>
-                    <option value = "javascript"> JavaScript
-                    </option>
-                    </select>
-                </form>
-            </div>
-          </div>
-          <textarea  placeholder="input" name="custom_input" id="custom_input" cols="30" rows="10"></textarea>
-          <textarea  style="display: none;" placeholder="output" name="custom_output" id="custom_output" cols="30" rows="10"></textarea>
-          <div class="run">
-    
-              <i class="fa fa-play" aria-hidden="true"> Run code</i>
-          </div>  
-          </div>
-           <div class="content">
-             <!--  <div class="sub-heading-2">Code Discussion</div> -->
-              <!-- <ol>
-                <li>We pass the given array to be sorted, lo and hi as parameters to the function mergeSort. Here lo is the index 0 at the beginning of the array and hi is the index arr.length-1 at the end of the array.</li>
-                <li><b>Base Case: </b> If at any time lo and hi cross each other then an array of size 1 is formed and stores the element at lo (or hi) .This array is then returned.</li>
-                <li>Now, we find the mid value of the array to split our unsorted array into 2 halves.</li>
-                <li>Then we recursively call the function mergeSort on the first array, which then returns us a sorted array (By our Faith).</li>
-                <li> Similarly we recursively call the function mergeSort on the second array, which then returns us  a sorted array (By our Faith).</li>
-                <li> When we have 2 sorted arrays available to us, we merge them together to give us a single sorted array as we already know from the previous question of “Merge 2 Sorted Arrays”.</li>
-                  <div class="youtube-video">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/WMxNhIBA92I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                  </div>
-                <li>Now that we have this merged sorted array with us we return it as the answer.</li>
-              </ol> -->
-              <p>Dear reader, we hope that you got the solution and the code. Still, if you have any doubts regarding the solution or the code you may watch the complete solution video to understand the concept properly.</p>
-                <div class="youtube-video">
-                    <iframe width="640" height="360" src="https://www.youtube.com/embed/J8EejK8zvw8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-
-          </div> 
-     
-
-          
-      <div class="analysis">
-        <div class="sub-heading-1">Analysis</div>
-        <div class="timeComplex">
-         <!--  <div class="content">
-          	 <p>Now that we have discussed the algorithm, let’s analyze it too. </p>
-             <p>We start the analysis from the first element 7 where i=0. Since 7>pivot i.e. 5, so as we have mentioned in the algorithm already we increment i by 1, hence i=1. Now the unknown area decreases by one element and the greater than area includes j to i-1 i.e.  0 to 0 . Hence 7 is included in the greater than area. </p>
-                <div class="img"><img src="./images/image4.png" alt="img" /></div>
-              <p>You might not have understood it through the first element. Let’s iterate it for the second element now. </p>
-              <p>We now analyze 9 where i=1. Since 9>pivot therefore i is incremented by 1 so i=2. Now the unknown area again decreases by one element and the greater than area includes j to i-1 indices i.e.  0 to 1 as shown in figure 5.</p>
-                <div class="img"><img src="./images/image5.png" alt="img" /></div>
-              <p>Now for i=2, we analyze the third element 4. Since 4<=pivot therefore elements at i and j are swapped.Also i and j are incremented by 1. So i=2 stores 7 now and j=0 stores 4 on swapping. Thereafter , i++=3 and j++=1.</p>
-              <p>Hence the unknown area again decreases by one element and the less than equal area is for j to i-1 i.e. 1 to 2 . The greater than area gets shifted forward as shown in figure 6.</p>
-                <div class="img"><img src="./images/image7.png" alt="img" /></div>
-              <p>Try to draw these figures for the rest of the elements.You should get a final figure that looks something like Figure 8.</p>
-                <div class="img"><img src="./images/image8.png" alt="img" /></div>
-              <p>At the end we see in figure 8 that all the elements less than equal to pivot are at the left side and the elements greater than the pivot are at the right side. Here the loop comes to an end when i goes to an index beyond the array and all the unknown elements are now known.</p>
-              <p>We highly suggest you watch the video “Partition An Array”[ 3:05-9:57] for a better understanding of this iteration.</p>
-              <div class="youtube-video">
-                  <iframe width="560" height="315" src="https://www.youtube.com/embed/if40LxQ8_Xo?start=185&end=597" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-              </div>
-          </div> -->
-          <div class="sub-heading-2">Time Complexity</div>
-          <div class="content">
-            
-            <p><b>Add: </b> The time complexity is O(n) as we are popping all the values from the main stack and pushing them into the helper stack and doing vice-versa. So, the time complexity becomes n+n=2n=O(n).</p>
-            
-            <p><b>Remove: </b> The time complexity for this method is O(1) as we just popped a value from the main stack.</p>
-
-            <p><b>Size:</b> The time complexity is O(1) as we just return the size of the main stack.</p>
-            
-            <p><b>Peek:</b> The time complexity is O(1) as we just use the peek method of the main stack.</p> 
-            
-           
-            <p></p>
-          </div>
+            <pre class='output'>
+            </pre>
+            <span type='text' class='language' style='width:40%;margin-right:5%'>java</span>;
+            <span type='text' style='width:40%' class='canRunCode' name='canRunCode'>true</span>";
         </div>
-        <div class="spaceComplex">
-          <div class="sub-heading-2">Space Complexity</div>
-          <div class="content">
-            
-            <p>
-            Well the space complexity can be considered as O(n) as we are using two stacks for implementing the queue. But, these two stacks are given to us in our question, and apart from these stacks, we have not used any extra data structure or memory to implement the queue. Since the data structure that is given in the question (2 stacks in this case) is not considered in the space complexity, the space complexity will be O(1).
-
-            </p>
-            
-            
-          </div>
-        </div>
-      </div>
-
-      <div class="content">
-        <!-- <div class="sub-heading-2">Extra Gyaan(Knowledge):</div> -->
-       <!--  <p>This question can be asked in many ways, by changing 0,1 and 2 like:</p>
-        <p>
-          <ol>
-            <li>Segregate -X, 0, and +X.</li>
-            <li>Segregate negative, zero and positive elements</li>
-            <li>Segregate red, blue and green colors.</li>
-            <li>Sort array of Xs, Ys and Zs.</li>
-
-          </ol>
-        </p>
-        <p>And so on, but the gist of the algorithm is the same, hence focus on the partitioning technique.</p>
-        <p><b>Asked in Companies: </b> Adobe, Amazon, Hike, MakeMyTrip, MAQ Software, Microsoft, Morgan Stanley, Ola Cabs, Paytm, Qualcomm, SAP Labs, Snapdeal, Walmart, Yatra.com</p> -->
-        <!-- <p>So reader, we hope you understood the solution of this problem successfully. Don’t worry if you are not able to understand this problem or you were not able to solve this problem by yourself initially.</p> -->
-        <!-- <p>Just spend more time reading and thinking about it. </p> -->
-        <!-- <p>However, if you still face any difficulties in the solution for the problem, you may visit the complete <a href="https://youtu.be/SVFXEqn3Ceo" target="_blank">solution video</a>.</p> -->
-        <!-- <div class="youtube-video">
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/hMJAlbJIS7E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div> -->
-        <!-- <p>We will see you again in the next problem. Till then, keep solving and learning  more problems.</p> -->
-        <!-- <p>So dear reader, did you get this problem completely? We recommend you again to solve the GET MAZE PATHS WITH JUMPS problem as well. We also recommend you to watch its <a href="https://www.youtube.com/watch?v=VaGBRiSdtFI&list=PL-Jc9J83PIiFxaBahjslhBD1LiJAV7nKs&index=33" target="_blank">complete solution video</a>  and <a href="https://youtu.be/zri_tftYphE?list=PL-Jc9J83PIiFxaBahjslhBD1LiJAV7nKs" target="_blank">the complete solution video</a> of this problem to clear the difference between the “get” and “print” problems in general.</p>
-        <div class="youtube-video">
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/F6T3tD8Pw20" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <div class="youtube-video">
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/zri_tftYphE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div> -->
-       <!--  <p>It would be an extreme pleasure if this article was helpful to you.</p>
-        <p>Our desire to make you learn will remain unsatisfactory if you still have doubts. We strongly recommend you to watch our video lecture on Sort Dates for clearing any type of doubts.</p>
-        <div class="youtube-video">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/YdzCuP6LwVg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <p>Suggestions and feedback are always welcomed. You can contact us via <a href="https://www.pepcoding.com/" target="_blank">our website</a>.</p>
-        <p>Just don’t burden yourself; there is a lot to come. This is merely the beginning. Keep trying more and more problems.</p> -->
-        <p> So, dear reader, we hope that you have understood the entire solution and the code as well as the time and space complexity analysis. If you still have any doubts you may refer to the complete solution video to clear all your doubts.</p>
-        <div class="youtube-video">
-           <iframe width="640" height="360" src="https://www.youtube.com/embed/J8EejK8zvw8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <!-- <p>Till then, Goodbye !</p> -->
-        <!-- <p>Happy coding!</p> -->
-      </div>
-      <div class="content">
-        <div class="sub-heading-2">Some Suggestions:</div>
-          <div class="content">
-            <p>Here are some suggestions from our side that you do not want to miss:</p>
-            <ol>
-              <li>This was also a very basic and easy problem, right? But you have to understand the real-world concepts behind it. What would you prefer in a real-world scenario? A queue that is push efficient or pop efficient, if the condition is to make it using two stacks? Depends on the need, right? But if you forget about the need right now, what would you use? Think and answer with a reason!!! </li>
-              <li>We suggest you search and spend some time thinking about where these kinds of situations may arise where you can either implement a push or a pop efficient queue. Until then, Happy Coding!!!</li>
-            </ol>
-            
-            <!-- <p> Till then, Happy Coding!</p>  -->
-            
-          </div>
-      </div> 
-      <!-- <div class="refrences">
-        <div class="sub-heading-1">References</div>
         <div class="content">
-          <div class="refrence">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
-            corrupti.
-          </div>
-          <div class="refrence">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
-            corrupti.
-          </div>
-          <div class="refrence">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
-            corrupti.
-          </div>
-          <div class="refrence">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
-            corrupti.
-          </div>
+            <p>Dear reader, we hope that you got the solution and the code. Still, if you have any doubts regarding the solution or the code you may watch the complete solution video to understand the concept properly.
+            </p>
+            <div class="youtube-video">
+                <iframe width="640" height="360" src="https://www.youtube.com/embed/J8EejK8zvw8?" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
         </div>
-      </div> -->
-      <div class="nextPrevBtns">
-        <div class="nextBtn">Next <i class="fas fa-greater-than"></i></div>
-        <div class="prevBtn"><i class="fas fa-less-than"></i>Back</div>
-      </div>
+      
+        <div class="analysis">
+          <div class="sub-heading-1">
+                <p>Time  and Space Complexity Analysis:</p>
+            </div>
+            <div class="sub-heading-2">Space Complexity:</div>
+            <div class="content">
+              <p> Well the space complexity can be considered as O(n) as we are using two stacks for implementing the queue. But, these two stacks are given to us in our question, and apart from these stacks, we have not used any extra data structure or memory to implement the queue. Since the data structure that is given in the question (2 stacks in this case) is not considered in the space complexity, the space complexity will be O(1).</p>
+            </div>
 
-      <div class="article-tags">
-        <div class="tag">Functions</div>
-        <div class="tag"> Arrays </div>
-        <div class="tag">Java</div>
-       
-       
-        <div class="tag">   Queues </div>
-        
+            <div class="sub-heading-2">Time Complexity:</div>
+            <div class="content">
+              <ol>
+                <li>Add: The time complexity is O(n) as we are popping all the values from the main stack and pushing them into the helper stack and doing vice-versa. So, the time complexity becomes n+n=2n=O(n).</li>
+                <li>Remove: The time complexity for this method is O(1) as we just popped a value from the main stack.</li>
+                <li>Size: The time complexity is O(1) as we just return the size of the main stack.</li>
+                <li>Peek: The time complexity is O(1) as we just use the peek method of the main stack.</li>
 
-       
-       
-        <!-- <div class="tag">  2D Arrays </div> -->
-       
-             
-      </div>      
-      <div class="author">
-        <div class="sub-heading-1">AUTHOR</div>
-        <div class="authorDetails">
-          <div class="dummy"><img src="./images/dummy.jpg" alt="" /></div>
-          <div class="details">
-            <span>Guneet Malhotra</span>
-          </div>
+              </ol>
+              <p>So, dear reader, we hope that you have understood the entire solution and the code as well as the time and space complexity analysis. If you still have any doubts you may refer to the complete solution video to clear all your doubts.</p>
+            </div>  
         </div>
-      </div>
-     
-      <div class="share">
-        <p class="temp1" >Share this article</p>
-        <div class="temp2">
-          <div class="span"><i class="fab fa-facebook-f"></i> <p>Facebook</p></div>
-          <div class="span"><i class="fab fa-twitter"></i> <p>Twitter</p></div>
-          <div class="span"><i class="fab fa-instagram"></i> <p>Instagram</p></div>
-          <div class="span"><i class="fab fa-whatsapp"></i><p>Whatsapp</p></div>
-          <div class="span"><i class="fab fa-linkedin-in"></i><p>Linkedin</p></div>
+       
+        <div class="article-tags">
+            <div class="tag">Functions and Arrays</div>
+            <div class="tag">Classes and Objects in Java</div>
+            <div class="tag">Stacks and Queues.</div>
         </div>
-      </div>
-
-        <div class="article-divider" style="margin-top: 30px;"></div>
-
-        <div class="imgZoomDiv">
-          <div class="imgZoomDivCloseBtn"><i class="fas fa-times"></i></div>
-          <div class="imgZoomDivImg"><img src="" alt="" /></div>
+        <div class="author">
+            <div class="sub-heading-1">AUTHOR</div>
+            <div class="article-contributor">
+                <div class="dummy"><img src="{{!--article contributor image--}}" alt="" /></div>
+                <div class="details">
+                    <span> <a href="{{!--article contributor linkedin profile--}}">Guneet Malhotra</a></span>
+                </div>
+            </div>
         </div>
+        <div class="share-options">
+            <p class="share-options-heading">Share this article</p>
+            <div class="">
+                <div class="span"><i class="fa fa-facebook"></i>
+                    <p class="social-media-name">Facebook</p>
+                </div>
+                <div class="span"><i class="fa fa-twitter"></i>
+                    <p class="social-media-name">Twitter</p>
+                </div>
+                <div class="span"><i class="fa fa-instagram"></i>
+                    <p class="social-media-name">Instagram</p>
+                </div>
+                <div class="span"><i class="fa fa-whatsapp"></i>
+                    <p class="social-media-name">Whatsapp</p>
+                </div>
+                <div class="span"><i class="fa fa-linkedin"></i>
+                    <p class="social-media-name">Linkedin</p>
+                </div>
+            </div>
+        </div>
+        <div class="lineBreak" style="margin-top: 30px;"></div>
+        <div class="img-zoom-div">
+            <div class="img-zoom-div-close-btn"><i class="fa fa-times"></i></div>
+            <div class="img-zoom-div-img"><img src="" alt="" /></div>
+        </div>
+    </div>
+</div>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+    href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@1,500&family=Fredoka+One&family=Marck+Script&family=Merienda:wght@700&family=Parisienne&family=Source+Code+Pro:wght@600&family=Varela+Round&display=swap"
+    rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.2.0/styles/monokai.css" />
+<link
+    href="https://fonts.googleapis.com/css2?family=Mulish:wght@300&family=Source+Code+Pro:wght@300&family=Spartan:wght@500&display=swap"
+    rel="stylesheet">
+</div>
+
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
     <script>
